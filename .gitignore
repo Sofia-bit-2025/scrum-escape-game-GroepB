@@ -1,7 +1,12 @@
 ### IntelliJ IDEA ###
+### IntelliJ IDEA ###
+# Exclude global output folder
 out/
+# Maar sta toe binnen src/structuren
 !**/src/main/**/out/
 !**/src/test/**/out/
+
+
 
 ### Eclipse ###
 .apt_generated
