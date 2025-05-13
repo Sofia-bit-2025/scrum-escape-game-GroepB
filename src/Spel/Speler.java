@@ -3,7 +3,7 @@ package Spel;
 
 import java.util.*;
 
-public class Speler {
+public class Speler extends StatusTemplate {
     private int huidigeKamer = 0;
     private final Set<Integer> voltooideKamers = new HashSet<>();
 
@@ -19,8 +19,11 @@ public class Speler {
     }
 
     // Toon de huidige status van de speler
-    public void toonStatus() {
-        System.out.println("Je bent nu bij kamer: " + huidigeKamer);
+    protected void toonHuidigeKamer() {
+        System.out.println("Je bent nu in kamer: " + huidigeKamer);
+    }
+    protected void toonGehaaldeKamers() {
         System.out.println("Kamers gehaald: " + voltooideKamers);
     }
 }
+
