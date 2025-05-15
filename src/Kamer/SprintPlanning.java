@@ -5,17 +5,11 @@
 // een eigen Scrumonderwerp behandelt.
 
 package Kamer;
+import java.util.Scanner;
 
 public class SprintPlanning implements Kamer {
-    private final String naam;//de naam van de kamer
-    private final String instructie;//uitleg over de opdracht in deze kamer.
-
-
-    //Constructor die naam en instructie instelt
-    public SprintPlanning() {
-        this.naam = "Sprint Planning";
-        this.instructie = "Plan de sprint.";
-    }
+    private final String naam = "Sprint Planning";
+    private final String instructie = "Bepaal wat haalbaar is in de komende sprint.";
 
     @Override
     public void betreed() {
@@ -23,18 +17,19 @@ public class SprintPlanning implements Kamer {
         System.out.println(instructie);
     }
 
-
-    //de logica voor de opdracht die de speler moet uitvoeren.
     @Override
     public void actieUitvoeren() {
-        System.out.println("Beantwoord de vraag over inschatting van taken");
-        // logica nog toevoegen
-
-
+        System.out.println("Wat is het doel van een Sprint Planning?");
+        System.out.println("A) Feedback verzamelen\nB) Doelen kiezen en werk inschatten\nC) Werk afronden");
+        Scanner scanner = new Scanner(System.in);
+        String antwoord = scanner.nextLine();
+        if (antwoord.equalsIgnoreCase("B")) {
+            System.out.println("✅ Correct! De doelen zijn gekozen en ingeschat.");
+        } else {
+            System.out.println("❌ Fout. Sprint Planning draait om doelen kiezen en werk inschatten.");
+        }
     }
 
-
-    //Retourneert de naam van de kamer
     @Override
     public String getNaam() {
         return naam;
