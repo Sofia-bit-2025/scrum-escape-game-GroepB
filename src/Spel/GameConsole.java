@@ -1,27 +1,13 @@
-//Deze klasse regelt de hele spelervaring via de CLI. Het vangt gebruikersinvoer op, bepaalt wat er moet gebeuren
-// (kamer openen, status tonen, foutmelding geven)
-// en voert dat uit door de juiste objecten aan te roepen.
-//Het is de game loop die het spel "levend" maakt.
-
 package Spel;
-
 
 import Kamer.*;
 import java.util.*;
 
-public class GameConsole {//de centrale spelcontroller klasse
-    //om invoer van de speler via de command line te lezen
+public class GameConsole {
+
     private final Scanner scanner = new Scanner(System.in);
+    private final Speler speler = new Speler(1);
 
-    //oudt bij in welke kamer de speler zit, welke hij al heeft gehaald,
-    // en welke obstakels actief zijn.
-    private final Speler speler = new Speler();
-
-    //een vaste mapping van kamernummers naar kamerobjecten.
-    //De sleutel (Integer) is het kamernummer
-    //de waarde is het object dat een specifieke kamer voorstelt (
-    //het spel op basis van invoer (kamer 2)
-    // precies bepalen welk kamerobject gestart moet worden
     private final Map<Integer, Kamer> kamers = Map.of(
             1, new SprintPlanning(),
             2, new ScrumBoard(),
@@ -30,60 +16,66 @@ public class GameConsole {//de centrale spelcontroller klasse
             5, new TiaFinaleKamer()
     );
 
-    //de start() methode
-
-
-
     public void start() {
-        System.out.println(" Welkom bij Scrum Escape Game!");
-        while (true) {//De hoofdloop die het spel constant laat draaien totdat de speler stop typt.
+        System.out.println("Welkom bij Scrum Escape Game!");
+        toonHelpMenu();
+
+        while (true) {
             System.out.print("\n> ");
-            String input = scanner.nextLine().toLowerCase();//Leest invoer van de speler via de CLI.
+            String input = scanner.nextLine().toLowerCase();
 
-            if (input.startsWith("ga naar kamer")) {//Haalt het kamernummer uit de invoer
-                //alle niet-nummers worden verwijderd
-                int nummer = Integer.parseInt(input.replaceAll("\\D+", ""));
+            if (input.startsWith("ga naar kamer")) {
+                try {
+                    int nummer = Integer.parseInt(input.replaceAll("\\D+", ""));
+                    if (kamers.containsKey(nummer)) {
+                        if (speler.magNaarKamer(nummer)) {
+                            Kamer kamer = kamers.get(nummer);
+                            kamer.betreed();
+                            kamer.actieUitvoeren();
+                            speler.kamerGehaald(nummer);
 
-                //Controleert of deze kamer bestaat in de Map<Integer, Kamer>.
-                if (kamers.containsKey(nummer)) {
-                    //Speler mag alleen naar een volgende kamer als de vorige voltooid is.
-                    if (speler.magNaarKamer(nummer)) {
-                        Kamer kamer = kamers.get(nummer);
-                        kamer.betreed();
-                        kamer.actieUitvoeren();
-                        speler.kamerGehaald(nummer);//Speler wordt geüpdatet
+
+                            SpelStatusDatabase.slaStatusOp(
+                                    speler.getSpelerId(),
+                                    "Kamer " + nummer,
+                                    speler.getGehaaldeKamersString()
+                            );
+
+                        } else {
+                            System.out.println("Je moet eerst eerdere kamer(s) halen.");
+                        }
                     } else {
-                        //duidelijke feedback
-                        System.out.println("Je moet eerst eerdere kamer(s) halen.");
+                        System.out.println("Die kamer bestaat niet.");
                     }
-                } else {//duidelijke feedback
-                    System.out.println(" Die kamer bestaat niet.");
+                } catch (NumberFormatException e) {
+                    System.out.println("Ongeldig kamer nummer.");
                 }
-
-                //een overzicht van voortgang
             } else if (input.equals("status")) {
-                speler.toonStatus();
-
-
+                speler.toonHuidigeKamer();
+                speler.toonGehaaldeKamers();
+                System.out.println("Speler ID: " + speler.getSpelerId());
+                System.out.println("Gehaalde kamers (netjes): " + speler.getGehaaldeKamersString());
+            } else if (input.equals("help")) {
+                toonHelpMenu();
             } else if (input.equals("stop")) {
-                System.out.println(" Tot de volgende keer!");//Beëindigt de while-lus
+                System.out.println("Tot de volgende keer!");
                 break;
-
-                //feedback bij niet-herkende commando’s
             } else {
                 System.out.println("Onbekend commando.");
             }
         }
     }
 
-
-
-
+    private void toonHelpMenu() {
+        System.out.println("\n--- Beschikbare commando's ---");
+        System.out.println("ga naar kamer [nummer]  - Om een kamer te betreden, bijv. 'ga naar kamer 1'");
+        System.out.println("status                  - Bekijk je voortgang");
+        System.out.println("help                    - Toon dit helpmenu");
+        System.out.println("stop                    - Stop het spel");
+    }
 
     public static void main(String[] args) {
         GameConsole game = new GameConsole();
         game.start();
     }
 }
-
-
