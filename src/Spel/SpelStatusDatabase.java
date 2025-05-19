@@ -6,25 +6,19 @@ import java.sql.SQLException;
 
 public class SpelStatusDatabase {
 
-    public static void slaStatusOp(int spelerId, String huidigeKamer, String gehaaldeKamers) {
-        Connection conn = DatabaseService.getConnection();
+    public static void slaStatusOp(int spelerId, String kamerNaam, String status) {
+        String sql = "INSERT INTO speler_status (speler_id, kamer_naam, status) VALUES (?, ?, ?)";
 
-        if (conn == null) {
-            System.out.println("Geen databaseverbinding.");
-            return;
-        }
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        String sql = "INSERT INTO speler_status (speler_id, huidige_kamer, gehaalde_kamers) VALUES (?, ?, ?) " +
-                "ON DUPLICATE KEY UPDATE huidige_kamer = VALUES(huidige_kamer), gehaalde_kamers = VALUES(gehaalde_kamers)";
-
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, spelerId);
-            stmt.setString(2, huidigeKamer);
-            stmt.setString(3, gehaaldeKamers);
+            stmt.setString(2, kamerNaam);
+            stmt.setString(3, status);
             stmt.executeUpdate();
-            System.out.println("Status succesvol opgeslagen!");
+
         } catch (SQLException e) {
-            System.out.println("Fout bij opslaan status: " + e.getMessage());
+            System.err.println("Fout bij opslaan status: " + e.getMessage());
         }
     }
 }
