@@ -1,81 +1,56 @@
 package Spel;
 
-import java.util.HashSet;
-import java.util.Set;
+import monster.Monster;
+
+import java.util.*;
 
 public class Speler {
 
-    private int spelerId;
-    private String gebruikersnaam;
-    private Set<Integer> gehaaldeKamers;  // kamers die speler gehaald heeft
-    private int huidigeKamer;
+    private int huidigeKamer = 0; // De huidige kamer waarin de speler zich bevindt
+    private final Set<Integer> voltooideKamers = new HashSet<>(); // Kamers die al gehaald zijn
+    private final List<Monster> actieveMonsters = new ArrayList<>(); // Monsters die actief zijn (fouten of obstakels)
 
-    // Static variabele om huidige ingelogde speler te onthouden
-    private static Speler ingelogdeSpeler = null;
-
-    // Constructor met id en gebruikersnaam (pas aan naar behoefte)
-    public Speler(int spelerId, String gebruikersnaam) {
-        this.spelerId = spelerId;
-        this.gebruikersnaam = gebruikersnaam;
-        this.gehaaldeKamers = new HashSet<>();
-        this.huidigeKamer = 0; // begin kamer 0 of 1 zoals nodig
-    }
-
-    public int getSpelerId() {
-        return spelerId;
-    }
-
-    public String getGebruikersnaam() {
-        return gebruikersnaam;
-    }
-
-    public Set<Integer> getGehaaldeKamers() {
-        return gehaaldeKamers;
-    }
-
-    public int getHuidigeKamer() {
-        return huidigeKamer;
-    }
-
-    public void setHuidigeKamer(int kamerNummer) {
-        this.huidigeKamer = kamerNummer;
-    }
-
+    // Wordt aangeroepen als een kamer succesvol is voltooid
     public void kamerGehaald(int kamerNummer) {
-        gehaaldeKamers.add(kamerNummer);
+        voltooideKamers.add(kamerNummer);
         huidigeKamer = kamerNummer;
     }
 
-    public String getGehaaldeKamersString() {
-        return gehaaldeKamers.toString();
-    }
-
+    // Controleert of speler naar de volgende kamer mag
     public boolean magNaarKamer(int kamerNummer) {
-        // voorbeeld check: mag alleen naar kamer 1 als het de eerste kamer is
-        // en mag pas naar volgende kamers als vorige gehaald is
-        if (kamerNummer == 1) return true;
-        return gehaaldeKamers.contains(kamerNummer - 1);
+        return kamerNummer == 1 || voltooideKamers.contains(kamerNummer - 1);
     }
 
-    // Static methods voor ingelogde speler
-    public static Speler getIngelogdeSpeler() {
-        return ingelogdeSpeler;
+    // Voeg een actief monster toe na een fout antwoord
+    public void voegMonsterToe(Monster monster) {
+        actieveMonsters.add(monster);
     }
 
-    public static void setIngelogdeSpeler(Speler speler) {
-        ingelogdeSpeler = speler;
+    // Print de huidige status naar de CLI
+    // Print de huidige status naar de CLI in duidelijke en gestructureerde vorm
+    public void toonStatus() {
+        System.out.println("\nSPELSTATUS");
+        System.out.println(" Huidige kamer: " + huidigeKamer);
+
+        if (voltooideKamers.isEmpty()) {
+            System.out.println("Je hebt nog geen kamers voltooid.");
+        } else {
+            // Sorteer kamers voor nette output
+            List<Integer> gesorteerd = new ArrayList<>(voltooideKamers);
+            Collections.sort(gesorteerd);
+            System.out.println("Voltooide kamers: " + gesorteerd);
+        }
+
+        if (actieveMonsters.isEmpty()) {
+            System.out.println("Geen actieve monsters.");
+        } else {
+            System.out.println("Actieve monsters:");
+            for (Monster monster : actieveMonsters) {
+                System.out.println("- " + monster.getNaam());
+            }
+        }
     }
 
-    public static void logout() {
-        ingelogdeSpeler = null;
-    }
-
-    // Voor debuggen / status printen
-    public void toonHuidigeKamer() {
-        System.out.println("Huidige kamer: " + huidigeKamer);
-    }
-
-    public void toonGehaaldeKamers() {
-        System.out.println("Gehaalde kamers: " + getGehaaldeKamersString());
-    }
 }
+
+

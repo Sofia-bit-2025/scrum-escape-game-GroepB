@@ -1,42 +1,40 @@
-//De speler te introduceren aan Sprint Planning binnen Scrum;
-//De kamer-instructie en bijbehorende actie/opdracht te tonen;
-//Onderdeel te zijn van een polymorf ontwerp
-// (via de Kamer interface) waarbij iedere kamer
-// een eigen Scrumonderwerp behandelt.
-
 package Kamer;
 
-public class SprintPlanning implements Kamer {
-    private final String naam;//de naam van de kamer
-    private final String instructie;//uitleg over de opdracht in deze kamer.
+import Opdracht.OpdrachtStrategy;
 
+/**
+ * Kamer waarin de speler leert hoe Sprint Planning werkt.
+ * De speler moet de sprint correct plannen via een opdracht.
+ */
+public class SprintPlanning extends Kamer {
+    private final String instructie;
+    private final OpdrachtStrategy opdracht;
 
-    //Constructor die naam en instructie instelt
-    public SprintPlanning() {
-        this.naam = "Sprint Planning";
+    /**
+     * Constructor voor de Sprint Planning-kamer.
+     * @param opdracht De opdracht van deze kamer.
+     */
+    public SprintPlanning(OpdrachtStrategy opdracht) {
+        super("Sprint Planning");
         this.instructie = "Plan de sprint.";
+        this.opdracht = opdracht;
     }
 
+    /**
+     * Laat een instructie zien wanneer de kamer betreden wordt.
+     */
     @Override
     public void betreed() {
-        System.out.println("Je betreedt: " + naam);
+        System.out.println("Je betreedt: " + getNaam());
         System.out.println(instructie);
     }
 
-
-    //de logica voor de opdracht die de speler moet uitvoeren.
+    /**
+     * Voert de opdracht uit en retourneert of het gelukt is.
+     * @return true als speler de opdracht goed uitvoert.
+     */
     @Override
-    public void actieUitvoeren() {
-        System.out.println("Beantwoord de vraag over inschatting van taken");
-        // logica nog toevoegen
-
-
-    }
-
-
-    //Retourneert de naam van de kamer
-    @Override
-    public String getNaam() {
-        return naam;
+    public boolean start() {
+        return opdracht.voerUit(); // Strategy pattern toegepast
     }
 }
