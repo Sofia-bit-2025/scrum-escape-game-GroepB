@@ -5,32 +5,31 @@
 //gescheiden van andere logica (SRP),
 //vervangbaar of uitbreidbaar
 package Kamer;
+import java.util.Scanner;
 
-
-
-public class ScrumDaily implements Kamer {//implementeert de interface Kamer
-    private final String naam;
-    private final String instructie;
-
-    //Constructor
-    public ScrumDaily() {
-        this.naam = "Daily Scrum";
-        this.instructie = "Iedereen geeft een korte statusupdate.";
-    }
+public class ScrumDaily implements Kamer {
+    private final String naam = "Daily Scrum";
+    private final String instructie = "Iedereen geeft een korte statusupdate.";
 
     @Override
-    public void betreed() {//oont de naam van de kamer en de uitleg,
+    public void betreed() {
         System.out.println("Je betreedt: " + naam);
         System.out.println(instructie);
-        //Hier nog vraag toevoegen met input validatie of een monster bij een fout antwoord.
     }
-
-
 
     @Override
     public void actieUitvoeren() {
-        System.out.println("Geef aan wat iedereen heeft gedaan");
+        System.out.println("Wat bespreek je tijdens een Daily Scrum?");
+        System.out.println("A) De product backlog aanpassen\nB) Wat je gisteren deed, vandaag gaat doen en blokkades\nC) De sprint verlengen");
+        Scanner scanner = new Scanner(System.in);
+        String antwoord = scanner.nextLine();
+        if (antwoord.equalsIgnoreCase("B")) {
+            System.out.println("✅ Correct! Dagelijkse stand-ups gaan daarover.");
+        } else {
+            System.out.println("❌ Fout. Een Daily Scrum bespreekt voortgang en blokkades.");
+        }
     }
+
     @Override
     public String getNaam() {
         return naam;
