@@ -1,27 +1,30 @@
 package Kamer;
-import java.util.Scanner;
 
 public class TiaFinaleKamer implements Kamer {
-    private final String naam = "Finale Kamer: TIA";
-    private final String instructie = "Beantwoord de eindvraag over Scrum.";
+    private final String naam;
+    private final String instructie;
 
+
+
+    //Constructor die naam en instructie initialiseert
+    public TiaFinaleKamer() {
+        this.naam = "Finale Kamer: TIA";
+        this.instructie = "Beantwoord vragen";
+    }
+
+
+    //Laat een welkombericht en instructie zien
     @Override
     public void betreed() {
         System.out.println("Je betreedt: " + naam);
         System.out.println(instructie);
     }
 
+
+    //Toont de afsluitende vraag
     @Override
     public void actieUitvoeren() {
-        System.out.println("Wat is het hoofddoel van Scrum?");
-        System.out.println("A) Alles documenteren\nB) Waarde leveren via iteraties\nC) De klant betrekken in design");
-        Scanner scanner = new Scanner(System.in);
-        String antwoord = scanner.nextLine();
-        if (antwoord.equalsIgnoreCase("B")) {
-            System.out.println("✅ Correct! Scrum draait om iteratief waarde leveren.");
-        } else {
-            System.out.println("❌ Fout. Scrum is iteratief en klantgericht, maar draait primair om waarde leveren.");
-        }
+        System.out.println("Leg uit wat Scrum in het geheel oplevert en waarom het iteratief werkt?");
     }
 
     @Override

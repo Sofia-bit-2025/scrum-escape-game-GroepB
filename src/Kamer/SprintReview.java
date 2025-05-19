@@ -3,31 +3,37 @@
 //Het evalueren van feedback van stakeholders;
 
 package Kamer;
-import java.util.Scanner;
 
 public class SprintReview implements Kamer {
-    private final String naam = "Sprint Review";
-    private final String instructie = "Beoordeel het resultaat en verzamel feedback.";
+    private final String naam;//Naam van deze kamer,
+    private final String instructie;//Instructie die uitlegt wat de speler moet doen
 
+
+    //Constructor die naam en instructie initialiseert.
+    public SprintReview() {
+        this.naam = "Sprint Review";
+        this.instructie = "Beoordeel het resultaat.";
+    }
+
+
+    //wordt aangeroepen wanneer de speler deze kamer binnenkomt.
+    // Toont naam + instructie.
     @Override
     public void betreed() {
         System.out.println("Je betreedt: " + naam);
         System.out.println(instructie);
     }
 
+
+
+    //Roept de specifieke opdracht van deze kamer aan
     @Override
     public void actieUitvoeren() {
-        System.out.println("Wie neemt deel aan de Sprint Review?");
-        System.out.println("A) Alleen het team\nB) Team, Scrum Master, Product Owner en stakeholders\nC) Alleen de Scrum Master");
-        Scanner scanner = new Scanner(System.in);
-        String antwoord = scanner.nextLine();
-        if (antwoord.equalsIgnoreCase("B")) {
-            System.out.println("✅ Correct! Iedereen die betrokken is komt samen.");
-        } else {
-            System.out.println("❌ Fout. De review is voor alle belanghebbenden.");
-        }
+        System.out.println("Evalueer de feedback van stakeholders");
     }
 
+
+    //Retourneert de kamernaam voor gebrui
     @Override
     public String getNaam() {
         return naam;
