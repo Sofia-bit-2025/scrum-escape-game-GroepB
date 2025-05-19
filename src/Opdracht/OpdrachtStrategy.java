@@ -1,7 +1,13 @@
-//Deze klassen vertellen precies wat de speler moet doen in die kamer.
 package Opdracht;
 
-//het algemene gedrag dat je wilt kunnen variëren.
+/**
+ * Interface voor opdrachten die per kamer verschillend zijn.
+ * Wordt gebruikt in het Strategy Pattern.
+ */
 public interface OpdrachtStrategy {
-    void voerUit();
+    /**
+     * Voert de opdracht uit.
+     * @return true als de opdracht succesvol werd uitgevoerd
+     */
+    boolean voerUit();
 }

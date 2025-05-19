@@ -1,44 +1,41 @@
-//toont instructies aan de speler en roept een actie
-// op die aansluit bij dat Scrumevent.
-
-//Door OOP en SOLID toe te passen is deze klasse:
-//gescheiden van andere logica (SRP),
-//vervangbaar of uitbreidbaar
 package Kamer;
+
 import Opdracht.OpdrachtStrategy;
 
-
-
-public class ScrumDaily implements Kamer {//implementeert de interface Kamer
-    private final String naam;
+/**
+ * Kamer waarin de speler ervaart hoe de Daily Scrum werkt.
+ * De speler moet de juiste statusupdate geven als opdracht.
+ */
+public class ScrumDaily extends Kamer {
     private final String instructie;
     private final OpdrachtStrategy opdracht;
 
-    //Constructor
+    /**
+     * Constructor voor de Daily Scrum kamer.
+     * @param opdracht De bijbehorende opdracht (via strategy pattern)
+     */
     public ScrumDaily(OpdrachtStrategy opdracht) {
-        this.naam = "Daily Scrum";
+        super("Daily Scrum");
         this.instructie = "Iedereen geeft een korte statusupdate.";
-        this.opdracht=opdracht;
+        this.opdracht = opdracht;
     }
 
+    /**
+     * Toont uitleg bij het betreden van de kamer.
+     */
     @Override
-    public void betreed() {//oont de naam van de kamer en de uitleg,
-        System.out.println("Je betreedt: " + naam);
+    public void betreed() {
+        System.out.println("Je betreedt: " + getNaam());
         System.out.println(instructie);
-        //Hier nog vraag toevoegen met input validatie of een monster bij een fout antwoord.
+        // Hier kun je later uitbreiden met validatie of een monster bij fout antwoord.
     }
 
-
-
+    /**
+     * Voert de opdracht uit en geeft terug of deze slaagt.
+     * @return true als opdracht goed is uitgevoerd
+     */
     @Override
-    public void actieUitvoeren(){
-        opdracht.voerUit();//strategy pattern toegepast
-    }
-
-
-
-    @Override
-    public String getNaam() {
-        return naam;
+    public boolean start() {
+        return opdracht.voerUit(); // Strategy pattern toegepast
     }
 }

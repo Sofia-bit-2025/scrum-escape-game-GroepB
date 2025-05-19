@@ -3,9 +3,10 @@ package Opdracht;
 import java.util.Scanner;
 
 public class SprintReviewOpdracht implements OpdrachtStrategy {
+
     @Override
-    public void voerUit() {
-        System.out.println(" Opdracht: Evalueer de feedback van stakeholders.");
+    public boolean voerUit() {
+        System.out.println("Opdracht: Evalueer de feedback van stakeholders.");
         System.out.println("Welke actie hoort bij een goede Sprint Review?");
         System.out.println("A) Nieuwe sprintdoelen plannen");
         System.out.println("B) Feedback ontvangen en bespreken");
@@ -15,12 +16,21 @@ public class SprintReviewOpdracht implements OpdrachtStrategy {
         System.out.print("> Kies A, B of C: ");
         String antwoord = scanner.nextLine().trim().toUpperCase();
 
-        if (antwoord.equals("B")) {
-            System.out.println("Juist! Een Sprint Review draait om feedback en samenwerking.");
-        } else if (antwoord.equals("A") || antwoord.equals("C")) {
-            System.out.println("Fout. In de Review wordt er vooral teruggeblikt met stakeholders.");
-        } else {
-            System.out.println(" Ongeldig . Kies A, B of C.");
+        if (antwoord.length() > 0) {
+            antwoord = antwoord.substring(0, 1);
+        }
+
+        switch (antwoord) {
+            case "B":
+                System.out.println("Juist! Een Sprint Review draait om feedback en samenwerking.");
+                return true;
+            case "A":
+            case "C":
+                System.out.println("Fout. In de Review wordt vooral teruggeblikt met stakeholders.");
+                return false;
+            default:
+                System.out.println("Ongeldig antwoord. Kies A, B of C.");
+                return false;
         }
     }
 }

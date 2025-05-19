@@ -1,44 +1,41 @@
-//de speler leert wat een Sprint Review inhoudt:
-//Het beoordelen van opgeleverd werk;
-//Het evalueren van feedback van stakeholders;
-
 package Kamer;
+
 import Opdracht.OpdrachtStrategy;
 
-public class SprintReview implements Kamer {
-    private final String naam;//Naam van deze kamer,
+/**
+ * Kamer waarin de speler leert hoe een Sprint Review werkt.
+ * De speler beoordeelt opgeleverd werk en verwerkt feedback.
+ */
+public class SprintReview extends Kamer {
     private final String instructie;
-    private final OpdrachtStrategy opdracht;//Instructie die uitlegt wat de speler moet doen
+    private final OpdrachtStrategy opdracht;
 
-
-    //Constructor die naam en instructie initialiseert.
+    /**
+     * Constructor voor de Sprint Review kamer.
+     * @param opdracht De opdracht die uitgevoerd moet worden.
+     */
     public SprintReview(OpdrachtStrategy opdracht) {
-        this.naam = "Sprint Review";
+        super("Sprint Review");
         this.instructie = "Beoordeel het resultaat.";
-        this.opdracht=opdracht;
+        this.opdracht = opdracht;
     }
 
-
-    //wordt aangeroepen wanneer de speler deze kamer binnenkomt.
-    // Toont naam + instructie.
+    /**
+     * Wordt aangeroepen bij het betreden van de kamer.
+     * Toont de instructie aan de speler.
+     */
     @Override
     public void betreed() {
-        System.out.println("Je betreedt: " + naam);
+        System.out.println("Je betreedt: " + getNaam());
         System.out.println(instructie);
     }
 
-
-
-    //Roept de specifieke opdracht van deze kamer aan
+    /**
+     * Voert de opdracht uit via Strategy pattern.
+     * @return true als de opdracht succesvol werd uitgevoerd
+     */
     @Override
-    public void actieUitvoeren() {
-        opdracht.voerUit();//strategy pattern toegepast
-    }
-
-
-    //Retourneert de kamernaam voor gebrui
-    @Override
-    public String getNaam() {
-        return naam;
+    public boolean start() {
+        return opdracht.voerUit();
     }
 }

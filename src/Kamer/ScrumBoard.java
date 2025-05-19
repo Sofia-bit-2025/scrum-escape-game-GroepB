@@ -1,34 +1,40 @@
-//de speler leert wat een Scrum Board is,
-//oefent met het juist indelen van taken op dat bord
-//voortgang maakt binnen het spel als de opdracht correct wordt uitgevoerd
 package Kamer;
+
 import Opdracht.OpdrachtStrategy;
 
-public class ScrumBoard implements Kamer {
-    private final String naam;//Naam van de kamer wordt getoond bij binnenkomst.
-    private final String instructie;//Uitleg over de opdracht
+/**
+ * Kamer waarin de speler leert hoe een Scrum Board werkt.
+ * De speler moet de opdracht correct uitvoeren om verder te mogen.
+ */
+public class ScrumBoard extends Kamer {
+    private final String instructie;
     private final OpdrachtStrategy opdracht;
 
+    /**
+     * Constructor voor de ScrumBoard-kamer.
+     * @param opdracht De opdracht die bij deze kamer hoort (strategy pattern).
+     */
     public ScrumBoard(OpdrachtStrategy opdracht) {
-        this.naam = "Scrum Board";
+        super("Scrum Board");
         this.instructie = "Richt het bord in met taken en user stories.";
         this.opdracht = opdracht;
     }
 
+    /**
+     * Laat de speler weten dat hij in de ScrumBoard-kamer is.
+     */
     @Override
-    public void betreed() {//Wordt aangeroepen als de speler de kamer binnenkomt
-        System.out.println("Je betreedt: " + naam);
+    public void betreed() {
+        System.out.println("Je betreedt: " + getNaam());
         System.out.println(instructie);
     }
 
+    /**
+     * Voert de opdracht uit en geeft aan of de speler is geslaagd.
+     * @return true als opdracht succesvol werd uitgevoerd
+     */
     @Override
-    public void actieUitvoeren() {
-     opdracht.voerUit();//strategy pattern toegepast
-    }
-
-    //naam van de kamer
-    @Override
-    public String getNaam() {
-        return naam;
+    public boolean start() {
+        return opdracht.voerUit(); // Strategy Pattern toegepast
     }
 }

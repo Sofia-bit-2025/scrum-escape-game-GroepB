@@ -27,9 +27,19 @@ public class Speler {
     }
 
     // Print de huidige status naar de CLI
+    // Print de huidige status naar de CLI in duidelijke en gestructureerde vorm
     public void toonStatus() {
-        System.out.println("Je bent nu bij kamer: " + huidigeKamer);
-        System.out.println(" Kamers gehaald: " + voltooideKamers);
+        System.out.println("\nSPELSTATUS");
+        System.out.println(" Huidige kamer: " + huidigeKamer);
+
+        if (voltooideKamers.isEmpty()) {
+            System.out.println("Je hebt nog geen kamers voltooid.");
+        } else {
+            // Sorteer kamers voor nette output
+            List<Integer> gesorteerd = new ArrayList<>(voltooideKamers);
+            Collections.sort(gesorteerd);
+            System.out.println("Voltooide kamers: " + gesorteerd);
+        }
 
         if (actieveMonsters.isEmpty()) {
             System.out.println("Geen actieve monsters.");
@@ -40,4 +50,7 @@ public class Speler {
             }
         }
     }
+
 }
+
+
