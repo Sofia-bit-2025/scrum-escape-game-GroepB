@@ -6,7 +6,7 @@ import java.util.*;
 public class GameConsole {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final Speler speler = new Speler(1);
+    private final Speler speler;
 
     private final Map<Integer, Kamer> kamers = Map.of(
             1, new SprintPlanning(),
@@ -15,6 +15,10 @@ public class GameConsole {
             4, new SprintReview(),
             5, new TiaFinaleKamer()
     );
+
+    public GameConsole(Speler speler) {
+        this.speler = speler;
+    }
 
     public void start() {
         System.out.println("Welkom bij Scrum Escape Game!");
@@ -75,7 +79,46 @@ public class GameConsole {
     }
 
     public static void main(String[] args) {
-        GameConsole game = new GameConsole();
+        Scanner scanner = new Scanner(System.in);
+        Speler speler = null;
+
+        System.out.println("Welkom bij Scrum Escape Game!");
+        System.out.println("Typ 'login' om in te loggen of 'register' om een nieuw account aan te maken.");
+
+        while (speler == null) {
+            System.out.print("> ");
+            String keuze = scanner.nextLine().toLowerCase();
+
+            if (keuze.equals("register")) {
+                System.out.print("Kies een gebruikersnaam: ");
+                String gebruikersnaam = scanner.nextLine();
+
+                System.out.print("Kies een wachtwoord: ");
+                String wachtwoord = scanner.nextLine();
+
+                boolean success = DatabaseService.registreer(gebruikersnaam, wachtwoord);
+                if (success) {
+                    System.out.println("Je kunt nu inloggen met je account.");
+                }
+
+            } else if (keuze.equals("login")) {
+                System.out.print("Gebruikersnaam: ");
+                String gebruikersnaam = scanner.nextLine();
+
+                System.out.print("Wachtwoord: ");
+                String wachtwoord = scanner.nextLine();
+
+                speler = DatabaseService.login(gebruikersnaam, wachtwoord);
+                if (speler == null) {
+                    System.out.println("Ongeldige inloggegevens. Probeer opnieuw.");
+                }
+            } else {
+                System.out.println("Ongeldige keuze. Typ 'login' of 'register'.");
+            }
+        }
+
+        // Spel starten
+        GameConsole game = new GameConsole(speler);
         game.start();
     }
 }

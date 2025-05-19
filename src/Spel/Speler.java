@@ -1,56 +1,81 @@
 package Spel;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Speler extends StatusTemplate {
-    private int spelerId = 1; // unique player ID
-    private int huidigeKamer = 0;
-    private final Set<Integer> voltooideKamers = new HashSet<>();
+public class Speler {
 
-    public Speler(int spelerId) {
+    private int spelerId;
+    private String gebruikersnaam;
+    private Set<Integer> gehaaldeKamers;  // kamers die speler gehaald heeft
+    private int huidigeKamer;
+
+    // Static variabele om huidige ingelogde speler te onthouden
+    private static Speler ingelogdeSpeler = null;
+
+    // Constructor met id en gebruikersnaam (pas aan naar behoefte)
+    public Speler(int spelerId, String gebruikersnaam) {
         this.spelerId = spelerId;
+        this.gebruikersnaam = gebruikersnaam;
+        this.gehaaldeKamers = new HashSet<>();
+        this.huidigeKamer = 0; // begin kamer 0 of 1 zoals nodig
     }
 
     public int getSpelerId() {
         return spelerId;
     }
 
+    public String getGebruikersnaam() {
+        return gebruikersnaam;
+    }
+
+    public Set<Integer> getGehaaldeKamers() {
+        return gehaaldeKamers;
+    }
+
     public int getHuidigeKamer() {
         return huidigeKamer;
     }
 
+    public void setHuidigeKamer(int kamerNummer) {
+        this.huidigeKamer = kamerNummer;
+    }
 
-    // Voeg een behaalde kamer toe
     public void kamerGehaald(int kamerNummer) {
-        voltooideKamers.add(kamerNummer);
+        gehaaldeKamers.add(kamerNummer);
         huidigeKamer = kamerNummer;
     }
 
-    // Check of speler naar opgegeven kamer mag
-    public boolean magNaarKamer(int kamerNummer) {
-        return kamerNummer == 1 || voltooideKamers.contains(kamerNummer - 1);
-    }
-
-    // Toon de huidige status van de speler
-    protected void toonHuidigeKamer() {
-        System.out.println("Je bent nu in kamer: " + huidigeKamer);
-    }
-
-    protected void toonGehaaldeKamers() {
-        System.out.println("Kamers gehaald: " + voltooideKamers);
-    }
-
-    // Return een String met de gehaalde kamers
     public String getGehaaldeKamersString() {
-        return voltooideKamers.stream()
-                .sorted()
-                .map(n -> "Kamer " + n)
-                .collect(Collectors.joining(", "));
+        return gehaaldeKamers.toString();
     }
 
-    // Als je voltooide kamers extern wil opvragen:
-    public Set<Integer> getVoltooideKamers() {
-        return Collections.unmodifiableSet(voltooideKamers);
+    public boolean magNaarKamer(int kamerNummer) {
+        // voorbeeld check: mag alleen naar kamer 1 als het de eerste kamer is
+        // en mag pas naar volgende kamers als vorige gehaald is
+        if (kamerNummer == 1) return true;
+        return gehaaldeKamers.contains(kamerNummer - 1);
+    }
+
+    // Static methods voor ingelogde speler
+    public static Speler getIngelogdeSpeler() {
+        return ingelogdeSpeler;
+    }
+
+    public static void setIngelogdeSpeler(Speler speler) {
+        ingelogdeSpeler = speler;
+    }
+
+    public static void logout() {
+        ingelogdeSpeler = null;
+    }
+
+    // Voor debuggen / status printen
+    public void toonHuidigeKamer() {
+        System.out.println("Huidige kamer: " + huidigeKamer);
+    }
+
+    public void toonGehaaldeKamers() {
+        System.out.println("Gehaalde kamers: " + getGehaaldeKamersString());
     }
 }
