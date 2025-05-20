@@ -10,7 +10,8 @@ public abstract class Kamer {
 
     /**
      * Constructor voor een kamer.
-     * @param naam De unieke naam van deze kamer.
+     * @param //afdwingen dat elke kamer een naam heeft.
+     * verplicht maken via de constructor
      */
     public Kamer(String naam) {
         this.naam = naam;

@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class SprintPlanningOpdracht implements OpdrachtStrategy {
 
+
+    //vraag en keuzemogelijkheden tonen
     @Override
     public boolean voerUit() {
         System.out.println("Wat plan je in de sprint?");
@@ -11,6 +13,7 @@ public class SprintPlanningOpdracht implements OpdrachtStrategy {
         System.out.println("B) Wat het team kan afronden");
         System.out.println("C) Alles in de backlog");
 
+        //antwoorden ophalen via scanner
         Scanner scanner = new Scanner(System.in);
         System.out.print("> Kies A, B of C: ");
         String antwoord = scanner.nextLine().trim().toUpperCase();

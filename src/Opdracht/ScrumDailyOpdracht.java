@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class ScrumDailyOpdracht implements OpdrachtStrategy {
 
+    //vraag
     @Override
     public boolean voerUit() {
         System.out.println("Opdracht: Wat wordt besproken tijdens een Daily Scrum?");
@@ -11,9 +12,10 @@ public class ScrumDailyOpdracht implements OpdrachtStrategy {
         System.out.println("B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades");
         System.out.println("C) Retrospective feedback");
 
+        // input vragen
         Scanner scanner = new Scanner(System.in);
         System.out.print("> Jouw antwoord: ");
-        String antwoord = scanner.nextLine().trim().toUpperCase();
+        String antwoord = scanner.nextLine().trim().toUpperCase();//spatie weghalen en naar hoofdletters omzetten
 
         // Alleen eerste letter checken
         if (antwoord.length() > 0) {
@@ -25,7 +27,7 @@ public class ScrumDailyOpdracht implements OpdrachtStrategy {
             return true;
         } else {
             System.out.println("Fout. Het juiste antwoord was: B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades.");
-            // Eventueel: speler.voegMonsterToe(new Vertraging());
+            // later toevoegen:  speler.voegMonsterToe(new Vertraging());
             return false;
         }
     }
