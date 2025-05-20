@@ -2,10 +2,10 @@ package Spel;
 
 public abstract class StatusTemplate {
     public final void toonStatus() {
-    toonHuidigeKamer();
-    toonGehaaldeKamers();
-     }
+        toonHuidigeKamer();
+        toonGehaaldeKamers();
+    }
 
-protected abstract void toonHuidigeKamer();
-protected abstract void toonGehaaldeKamers();
+    protected abstract void toonHuidigeKamer();
+    protected abstract void toonGehaaldeKamers();
 }

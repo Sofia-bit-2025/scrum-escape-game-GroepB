@@ -1,56 +1,37 @@
 package Spel;
 
-import monster.Monster;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Speler {
+    private int spelerId;
+    private String gebruikersnaam;
+    private Set<Integer> gehaaldeKamers = new HashSet<>();
+    private int huidigeKamer = 0;
 
-    private int huidigeKamer = 0; // De huidige kamer waarin de speler zich bevindt
-    private final Set<Integer> voltooideKamers = new HashSet<>(); // Kamers die al gehaald zijn
-    private final List<Monster> actieveMonsters = new ArrayList<>(); // Monsters die actief zijn (fouten of obstakels)
+    public Speler(int spelerId, String gebruikersnaam) {
+        this.spelerId = spelerId;
+        this.gebruikersnaam = gebruikersnaam;
+    }
 
-    // Wordt aangeroepen als een kamer succesvol is voltooid
+    public int getSpelerId() {
+        return spelerId;
+    }
+
+    public String getGebruikersnaam() {
+        return gebruikersnaam;
+    }
+
+    public Set<Integer> getGehaaldeKamers() {
+        return gehaaldeKamers;
+    }
+
+    public int getHuidigeKamer() {
+        return huidigeKamer;
+    }
+
     public void kamerGehaald(int kamerNummer) {
-        voltooideKamers.add(kamerNummer);
+        gehaaldeKamers.add(kamerNummer);
         huidigeKamer = kamerNummer;
     }
-
-    // Controleert of speler naar de volgende kamer mag
-    public boolean magNaarKamer(int kamerNummer) {
-        return kamerNummer == 1 || voltooideKamers.contains(kamerNummer - 1);
-    }
-
-    // Voeg een actief monster toe na een fout antwoord
-    public void voegMonsterToe(Monster monster) {
-        actieveMonsters.add(monster);
-    }
-
-    // Print de huidige status naar de CLI
-    // Print de huidige status naar de CLI in duidelijke en gestructureerde vorm
-    public void toonStatus() {
-        System.out.println("\nSPELSTATUS");
-        System.out.println(" Huidige kamer: " + huidigeKamer);
-
-        if (voltooideKamers.isEmpty()) {
-            System.out.println("Je hebt nog geen kamers voltooid.");
-        } else {
-            // Sorteer kamers voor nette output
-            List<Integer> gesorteerd = new ArrayList<>(voltooideKamers);
-            Collections.sort(gesorteerd);
-            System.out.println("Voltooide kamers: " + gesorteerd);
-        }
-
-        if (actieveMonsters.isEmpty()) {
-            System.out.println("Geen actieve monsters.");
-        } else {
-            System.out.println("Actieve monsters:");
-            for (Monster monster : actieveMonsters) {
-                System.out.println("- " + monster.getNaam());
-            }
-        }
-    }
-
 }
-
-
