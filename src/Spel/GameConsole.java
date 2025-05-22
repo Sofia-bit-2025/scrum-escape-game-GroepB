@@ -12,7 +12,7 @@ public class GameConsole {
 
     public GameConsole(Speler speler) {
         this.spelerService = new SpelerService(speler);
-        this.kamers = Spel.maakKamers();
+        this.kamers = FactoryKamer.maakKamers();
         this.spelerStatus = new SpelerStatus(speler);
     }
 

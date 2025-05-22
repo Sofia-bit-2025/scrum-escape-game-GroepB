@@ -6,7 +6,7 @@ import Opdracht.*;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Spel {
+public class FactoryKamer {
     public static Map<Integer, Kamer> maakKamers() {
         Map<Integer, Kamer> kamers = new HashMap<>();
         kamers.put(1, new SprintPlanning(new SprintPlanningOpdracht()));
