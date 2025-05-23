@@ -1,8 +1,18 @@
 package Opdracht;
 
+
+import Hint.HintProvider;
+
 import java.util.Scanner;
 
 public class ScrumBoardOpdracht implements OpdrachtStrategy {
+
+    private final HintProvider hintProvider;
+
+    public ScrumBoardOpdracht(HintProvider hintProvider) {
+        this.hintProvider = hintProvider;
+    }
+
 
     @Override
     public boolean voerUit() {
@@ -28,8 +38,15 @@ public class ScrumBoardOpdracht implements OpdrachtStrategy {
             return true;
         } else {
             System.out.println("Fout. Het juiste antwoord was: B) Doing.");
-            // speler.voegMonsterToe(new Vertraging())  nog toevoegen
+            System.out.print("Wil je een hint? (ja/nee): ");
+            String keuze = scanner.nextLine().trim().toLowerCase();
+            if (keuze.equals("ja")) {
+                System.out.println("Hint: " + hintProvider.getHint());
+            }
             return false;
         }
+
+
     }
+
 }

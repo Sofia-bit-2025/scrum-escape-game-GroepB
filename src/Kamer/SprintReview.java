@@ -1,6 +1,8 @@
 package Kamer;
-
+import Hint.HintProvider;
+import Hint.SprintReviewHintProvider;
 import Opdracht.OpdrachtStrategy;
+import Opdracht.SprintReviewOpdracht;
 
 /**
  * Kamer waarin de speler leert hoe een Sprint Review werkt.
@@ -17,7 +19,8 @@ public class SprintReview extends Kamer {
     public SprintReview(OpdrachtStrategy opdracht) {
         super("Sprint Review");
         this.instructie = "Beoordeel het resultaat.";
-        this.opdracht = opdracht;
+        HintProvider hintProvider = new SprintReviewHintProvider();
+        this.opdracht = new SprintReviewOpdracht(hintProvider);
     }
 
     /**

@@ -1,6 +1,9 @@
 package Kamer;
 
+import Hint.HintProvider;
+import Hint.ScrumBoardHintProvider;
 import Opdracht.OpdrachtStrategy;
+import Opdracht.ScrumBoardOpdracht;
 
 /**
  * Kamer waarin de speler leert hoe een Scrum Board werkt.
@@ -17,7 +20,9 @@ public class ScrumBoard extends Kamer {
     public ScrumBoard(OpdrachtStrategy opdracht) {
         super("Scrum Board");
         this.instructie = "Richt het bord in met taken en user stories.";
-        this.opdracht = opdracht;
+        HintProvider hintProvider = new ScrumBoardHintProvider();
+        this.opdracht = new ScrumBoardOpdracht(hintProvider);
+
     }
 
     /**

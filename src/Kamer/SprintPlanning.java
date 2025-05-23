@@ -1,6 +1,8 @@
 package Kamer;
-
+import Hint.HintProvider;
+import Hint.SprintPlanningHintProvider;
 import Opdracht.OpdrachtStrategy;
+import Opdracht.SprintPlanningOpdracht;
 
 /**
  * Kamer waarin de speler leert hoe Sprint Planning werkt.
@@ -17,7 +19,8 @@ public class SprintPlanning extends Kamer {
     public SprintPlanning(OpdrachtStrategy opdracht) {
         super("Sprint Planning");
         this.instructie = "Plan de sprint.";
-        this.opdracht = opdracht;
+        HintProvider hintProvider = new SprintPlanningHintProvider();
+        this.opdracht = new SprintPlanningOpdracht(hintProvider);
     }
 
     /**

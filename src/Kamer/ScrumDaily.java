@@ -1,6 +1,8 @@
 package Kamer;
-
+import Hint.HintProvider;
+import Hint.ScrumDailyHintProvider;
 import Opdracht.OpdrachtStrategy;
+import Opdracht.ScrumDailyOpdracht;
 
 /**
  * Kamer waarin de speler ervaart hoe de Daily Scrum werkt.
@@ -17,7 +19,8 @@ public class ScrumDaily extends Kamer {
     public ScrumDaily(OpdrachtStrategy opdracht) {
         super("Daily Scrum");
         this.instructie = "Iedereen geeft een korte statusupdate.";
-        this.opdracht = opdracht;
+        HintProvider hintProvider = new ScrumDailyHintProvider();
+        this.opdracht = new ScrumDailyOpdracht(hintProvider);
     }
 
     /**

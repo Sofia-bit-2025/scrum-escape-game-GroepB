@@ -1,8 +1,18 @@
 package Opdracht;
 
 import java.util.Scanner;
+import Hint.HintProvider;
+
+
 
 public class ScrumDailyOpdracht implements OpdrachtStrategy {
+
+    private final HintProvider hintProvider;
+    public ScrumDailyOpdracht(HintProvider hintProvider) {
+        this.hintProvider = hintProvider;
+    }
+
+
 
     //vraag
     @Override
@@ -27,7 +37,12 @@ public class ScrumDailyOpdracht implements OpdrachtStrategy {
             return true;
         } else {
             System.out.println("Fout. Het juiste antwoord was: B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades.");
-            // later toevoegen:  speler.voegMonsterToe(new Vertraging());
+            System.out.print("Wil je een hint? (ja/nee): ");
+            String keuze = scanner.nextLine().trim().toLowerCase();
+
+            if (keuze.equals("ja")) {
+                System.out.println("Hint: " + hintProvider.getHint());
+            }
             return false;
         }
     }

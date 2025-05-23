@@ -1,6 +1,8 @@
 package Kamer;
-
+import Hint.HintProvider;
+import Hint.TiaFinaleKamerHintprovider;
 import Opdracht.OpdrachtStrategy;
+import Opdracht.TiaFinaleOpdracht;
 
 /**
  * De finale kamer waarin de speler een afsluitende reeks vragen beantwoordt.
@@ -17,7 +19,8 @@ public class TiaFinaleKamer extends Kamer {
     public TiaFinaleKamer(OpdrachtStrategy opdracht) {
         super("Finale Kamer: TIA");
         this.instructie = "Beantwoord vragen.";
-        this.opdracht = opdracht;
+        HintProvider hintProvider = new TiaFinaleKamerHintprovider();
+        this.opdracht = new TiaFinaleOpdracht(hintProvider);
     }
 
     /**
