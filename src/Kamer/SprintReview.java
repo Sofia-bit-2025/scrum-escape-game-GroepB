@@ -12,12 +12,14 @@ public class SprintReview extends Kamer {
 
     /**
      * Constructor voor de Sprint Review kamer.
-     * @param opdracht De opdracht die uitgevoerd moet worden.
+     * De opdracht wordt van buitenaf geïnjecteerd (via abstractie).
+     *
+     * @param opdracht De opdrachtstrategie die uitgevoerd moet worden.
      */
     public SprintReview(OpdrachtStrategy opdracht) {
         super("Sprint Review");
         this.instructie = "Beoordeel het resultaat.";
-        this.opdracht = opdracht;
+        this.opdracht = opdracht; // abstractie → DIP toegepast
     }
 
     /**

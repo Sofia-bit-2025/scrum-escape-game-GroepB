@@ -2,7 +2,11 @@ package Opdracht;
 
 import java.util.Scanner;
 
+import Hint.HintFactory;
+import Hint.HintProvider;
+
 public class SprintPlanningOpdracht implements OpdrachtStrategy {
+
 
 
     //vraag en keuzemogelijkheden tonen
@@ -30,10 +34,17 @@ public class SprintPlanningOpdracht implements OpdrachtStrategy {
             case "A":
             case "C":
                 System.out.println("Fout! Je plant geen willekeurige bugs of alles uit de backlog.");
-                return false;
-            default:
-                System.out.println("Ongeldig antwoord. Kies A, B of C.");
+
+                System.out.print("Wil je een hint? (ja/nee): ");
+                String keuze = scanner.nextLine().trim().toLowerCase();
+
+                if (keuze.equals("ja")) {
+                    HintProvider hintProvider = HintFactory.createRandomHintProvider();
+                    System.out.println("Hint: " + hintProvider.getHint());
+                }
+
                 return false;
         }
+        return false;
     }
 }

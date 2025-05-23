@@ -2,7 +2,11 @@ package Opdracht;
 
 import java.util.Scanner;
 
+import Hint.HintFactory;
+import Hint.HintProvider;
+
 public class SprintReviewOpdracht implements OpdrachtStrategy {
+
 
     @Override
     public boolean voerUit() {
@@ -27,10 +31,19 @@ public class SprintReviewOpdracht implements OpdrachtStrategy {
             case "A":
             case "C":
                 System.out.println("Fout. In de Review wordt vooral teruggeblikt met stakeholders.");
-                return false;
-            default:
-                System.out.println("Ongeldig antwoord. Kies A, B of C.");
+
+                System.out.print("Wil je een hint? (ja/nee): ");
+                String keuze = scanner.nextLine().trim().toLowerCase();
+
+                if (keuze.equals("ja")) {
+                    HintProvider hintProvider = HintFactory.createRandomHintProvider();
+                    System.out.println("Hint: " + hintProvider.getHint());
+                }
                 return false;
         }
+
+
+        return false;
     }
+
 }

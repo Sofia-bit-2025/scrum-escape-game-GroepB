@@ -12,12 +12,12 @@ public class ScrumBoard extends Kamer {
 
     /**
      * Constructor voor de ScrumBoard-kamer.
-     * @param opdracht De opdracht die bij deze kamer hoort (strategy pattern).
+     * @param opdracht De opdrachtstrategie die bij deze kamer hoort (via Strategy Pattern en DIP).
      */
     public ScrumBoard(OpdrachtStrategy opdracht) {
         super("Scrum Board");
         this.instructie = "Richt het bord in met taken en user stories.";
-        this.opdracht = opdracht;
+        this.opdracht = opdracht; // Geen concrete opdracht maken hier
     }
 
     /**

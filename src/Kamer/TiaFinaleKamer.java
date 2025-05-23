@@ -12,6 +12,8 @@ public class TiaFinaleKamer extends Kamer {
 
     /**
      * Constructor voor de finale kamer van het spel.
+     * De opdrachtstrategie wordt van buitenaf geïnjecteerd (DIP).
+     *
      * @param opdracht De afsluitende opdracht (strategy pattern).
      */
     public TiaFinaleKamer(OpdrachtStrategy opdracht) {
@@ -38,3 +40,4 @@ public class TiaFinaleKamer extends Kamer {
         return opdracht.voerUit();
     }
 }
+

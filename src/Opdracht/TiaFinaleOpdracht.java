@@ -2,7 +2,12 @@ package Opdracht;
 
 import java.util.Scanner;
 
+import Hint.HintFactory;
+import Hint.HintProvider;
+
 public class TiaFinaleOpdracht implements OpdrachtStrategy {
+
+
 
     @Override
     public boolean voerUit() {
@@ -27,10 +32,20 @@ public class TiaFinaleOpdracht implements OpdrachtStrategy {
             case "A":
             case "C":
                 System.out.println("Fout. Scrum gebruikt iteraties om steeds kleine stappen te verbeteren.");
-                return false;
-            default:
-                System.out.println("Ongeldig antwoord. Kies A, B of C.");
-                return false;
+
+                System.out.print("Wil je een hint? (ja/nee): ");
+                String keuze = scanner.nextLine().trim().toLowerCase();
+
+                if (keuze.equals("ja")) {
+                    HintProvider hintProvider = HintFactory.createRandomHintProvider();
+                    System.out.println("Hint: " + hintProvider.getHint());
+                }
+
+                return false;  // altijd returnen, ongeacht of speler een hint wil
         }
+        return false;
     }
 }
+
+
+

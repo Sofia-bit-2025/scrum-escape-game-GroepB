@@ -12,12 +12,14 @@ public class SprintPlanning extends Kamer {
 
     /**
      * Constructor voor de Sprint Planning-kamer.
-     * @param opdracht De opdracht van deze kamer.
+     * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast).
+     *
+     * @param opdracht De opdracht van deze kamer (strategy pattern).
      */
     public SprintPlanning(OpdrachtStrategy opdracht) {
         super("Sprint Planning");
         this.instructie = "Plan de sprint.";
-        this.opdracht = opdracht;
+        this.opdracht = opdracht; // alleen abstractie gebruiken
     }
 
     /**
