@@ -1,6 +1,6 @@
 package Kamer;
-
 import Opdracht.OpdrachtStrategy;
+
 
 /**
  * Kamer waarin de speler leert hoe Sprint Planning werkt.
@@ -12,6 +12,7 @@ public class SprintPlanning extends Kamer {
 
     /**
      * Constructor voor de Sprint Planning-kamer.
+     *
      * @param opdracht De opdracht van deze kamer.
      */
     public SprintPlanning(OpdrachtStrategy opdracht) {
@@ -31,6 +32,7 @@ public class SprintPlanning extends Kamer {
 
     /**
      * Voert de opdracht uit en retourneert of het gelukt is.
+     *
      * @return true als speler de opdracht goed uitvoert.
      */
     @Override

@@ -12,6 +12,7 @@ public class TiaFinaleKamer extends Kamer {
 
     /**
      * Constructor voor de finale kamer van het spel.
+     *
      * @param opdracht De afsluitende opdracht (strategy pattern).
      */
     public TiaFinaleKamer(OpdrachtStrategy opdracht) {
@@ -31,6 +32,7 @@ public class TiaFinaleKamer extends Kamer {
 
     /**
      * Voert de opdracht uit en retourneert of deze succesvol is.
+     *
      * @return true als speler correct antwoordt, anders false
      */
     @Override

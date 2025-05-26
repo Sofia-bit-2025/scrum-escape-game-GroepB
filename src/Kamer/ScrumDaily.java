@@ -12,6 +12,7 @@ public class ScrumDaily extends Kamer {
 
     /**
      * Constructor voor de Daily Scrum kamer.
+     *
      * @param opdracht De bijbehorende opdracht (via strategy pattern)
      */
     public ScrumDaily(OpdrachtStrategy opdracht) {
@@ -32,6 +33,7 @@ public class ScrumDaily extends Kamer {
 
     /**
      * Voert de opdracht uit en geeft terug of deze slaagt.
+     *
      * @return true als opdracht goed is uitgevoerd
      */
     @Override
