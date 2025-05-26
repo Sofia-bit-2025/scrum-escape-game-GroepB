@@ -12,6 +12,7 @@ public class ScrumBoard extends Kamer {
 
     /**
      * Constructor voor de ScrumBoard-kamer.
+     *
      * @param opdracht De opdracht die bij deze kamer hoort (strategy pattern).
      */
     public ScrumBoard(OpdrachtStrategy opdracht) {
@@ -31,6 +32,7 @@ public class ScrumBoard extends Kamer {
 
     /**
      * Voert de opdracht uit en geeft aan of de speler is geslaagd.
+     *
      * @return true als opdracht succesvol werd uitgevoerd
      */
     @Override
@@ -38,3 +40,5 @@ public class ScrumBoard extends Kamer {
         return opdracht.voerUit(); // Strategy Pattern toegepast
     }
 }
+
+

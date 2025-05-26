@@ -28,6 +28,7 @@ public abstract class Kamer {
      */
     public abstract boolean start();
 
+
     /**
      * Geeft de naam van de kamer terug.
      * @return naam van de kamer
