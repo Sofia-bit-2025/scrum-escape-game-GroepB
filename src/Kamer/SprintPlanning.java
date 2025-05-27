@@ -1,9 +1,9 @@
 package Kamer;
+
 import Opdracht.OpdrachtStrategy;
 
-
 /**
- * Kamer waarin de speler leert hoe Sprint Planning werkt.
+
  * De speler moet de sprint correct plannen via een opdracht.
  */
 public class SprintPlanning extends Kamer {
@@ -11,14 +11,15 @@ public class SprintPlanning extends Kamer {
     private final OpdrachtStrategy opdracht;
 
     /**
-     * Constructor voor de Sprint Planning-kamer.
+
+     * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast).
      *
-     * @param opdracht De opdracht van deze kamer.
+     * @param opdracht De opdracht van deze kamer (strategy pattern).
      */
     public SprintPlanning(OpdrachtStrategy opdracht) {
         super("Sprint Planning");
         this.instructie = "Plan de sprint.";
-        this.opdracht = opdracht;
+        this.opdracht = opdracht; // alleen abstractie gebruiken
     }
 
     /**
@@ -32,7 +33,6 @@ public class SprintPlanning extends Kamer {
 
     /**
      * Voert de opdracht uit en retourneert of het gelukt is.
-     *
      * @return true als speler de opdracht goed uitvoert.
      */
     @Override
