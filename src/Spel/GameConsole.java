@@ -2,7 +2,7 @@ package Spel;
 
 import Kamer.Kamer;
 import Opdracht.HintJoker;
-
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -13,13 +13,18 @@ public class GameConsole {
     private final SpelerStatus spelerStatus;
     private final HelpMenu helpMenu = new HelpMenu();
     private final KamerCommando kamerCommando;
+    private final Map<Integer, Deur> deuren;
     HintJoker hintJoker = new HintJoker();
 
     public GameConsole(Speler speler) {
         this.spelerService = new SpelerService(speler);
         this.kamers = FactoryKamer.maakKamers();
         this.spelerStatus = new SpelerStatus(speler);
-        this.kamerCommando = new KamerCommando(kamers, spelerService, scanner);
+        this.deuren = new HashMap<>();
+        for (int nummer : kamers.keySet()) {
+            deuren.put(nummer, new Deur());
+        }
+        this.kamerCommando = new KamerCommando(kamers, deuren , spelerService, scanner);
     }
 
     public void start() {
