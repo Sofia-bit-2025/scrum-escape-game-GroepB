@@ -3,7 +3,7 @@ package Kamer;
 import Opdracht.OpdrachtStrategy;
 
 /**
- * Kamer waarin de speler ervaart hoe de Daily Scrum werkt.
+
  * De speler moet de juiste statusupdate geven als opdracht.
  */
 public class ScrumDaily extends Kamer {
@@ -11,10 +11,10 @@ public class ScrumDaily extends Kamer {
     private final OpdrachtStrategy opdracht;
 
     /**
-     * Constructor voor de Daily Scrum kamer.
-     * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast).
+     * Constructor voor de DailyScrum kamer.
+     * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast)
      *
-     * @param opdracht De bijbehorende opdracht (via strategy pattern)
+     * @param opdracht  (via strategy pattern)
      */
     public ScrumDaily(OpdrachtStrategy opdracht) {
         super("Daily Scrum");
@@ -23,7 +23,7 @@ public class ScrumDaily extends Kamer {
     }
 
     /**
-     * Toont uitleg bij het betreden van de kamer.
+     * Toont uitleg bij het enter van de kamer.
      */
     @Override
     public void betreed() {
@@ -32,7 +32,7 @@ public class ScrumDaily extends Kamer {
     }
 
     /**
-     * Voert de opdracht uit en geeft terug of deze slaagt.
+
      * @return true als opdracht goed is uitgevoerd
      */
     @Override

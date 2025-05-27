@@ -18,6 +18,7 @@ public class TiaFinaleOpdracht implements OpdrachtStrategy {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("> Kies A, B of C: ");
+
         String antwoord = scanner.nextLine().trim().toUpperCase();
 
         // Alleen eerste letter gebruiken

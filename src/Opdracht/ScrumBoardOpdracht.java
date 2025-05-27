@@ -1,4 +1,4 @@
-//In deze opdrachtklasse wordt de hint uitsluitend opgevraagd via
+//In deze opdrachtklasse wordt de hint opgevraagd via
 // de interface HintProvider, gekozen door HintFactory.
 // Er is geen directe koppeling met concrete hintklassen,
 // en de logica voor hintselectie is verplaatst naar de Factory.
@@ -29,7 +29,7 @@ public class ScrumBoardOpdracht implements OpdrachtStrategy {
         System.out.print("> Jouw antwoord: ");
         String antwoord = scanner.nextLine().trim().toUpperCase();//spatie weg/hoofdletter
 
-        // Pak alleen de eerste letter, bijv. bij B) Doing
+        // Pak alleen de eerste letter, bijv. bij B) doing
         if (antwoord.length() > 0) {
             antwoord = antwoord.substring(0, 1);
         }

@@ -1,7 +1,7 @@
 package Opdracht;
 
 /**
- * Interface voor opdrachten die per kamer verschillend zijn.
+ * Interface voor opdrachten -> per kamer verschillend
  * Wordt gebruikt in het Strategy Pattern.
  */
 public interface OpdrachtStrategy {

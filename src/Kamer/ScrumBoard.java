@@ -17,11 +17,11 @@ public class ScrumBoard extends Kamer {
     public ScrumBoard(OpdrachtStrategy opdracht) {
         super("Scrum Board");
         this.instructie = "Richt het bord in met taken en user stories.";
-        this.opdracht = opdracht; // Geen concrete opdracht maken hier
+        this.opdracht = opdracht; // Geen concrete opdracht maken hier dus wegens DIP
     }
 
     /**
-     * Laat de speler weten dat hij in de ScrumBoard-kamer is.
+     * Laat de speler weten dat hij in de ScrumBoard kamer is.
      */
     @Override
     public void betreed() {
@@ -30,11 +30,11 @@ public class ScrumBoard extends Kamer {
     }
 
     /**
-     * Voert de opdracht uit en geeft aan of de speler is geslaagd.
+
      * @return true als opdracht succesvol werd uitgevoerd
      */
     @Override
     public boolean start() {
-        return opdracht.voerUit(); // Strategy Pattern toegepast
+        return opdracht.voerUit(); // Strategy Pattern toegepast hier
     }
 }

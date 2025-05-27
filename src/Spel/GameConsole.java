@@ -11,11 +11,11 @@ public class GameConsole {
 
     // Injectie van opdrachten via abstractie. Hint wordt binnen de opdrachten gekozen via HintFactory.
     private final Map<Integer, Kamer> kamers = Map.of(
-            1, new SprintPlanning(new SprintPlanningOpdracht(new SprintPlanningHintProvider())),
-            2, new ScrumBoard(new ScrumBoardOpdracht(new ScrumBoardHintProvider())),
-            3, new ScrumDaily(new ScrumDailyOpdracht(new ScrumDailyHintProvider())),
-            4, new SprintReview(new SprintReviewOpdracht(new SprintReviewHintProvider())),
-            5, new TiaFinaleKamer(new TiaFinaleOpdracht(new TiaFinaleKamerHintprovider()))
+            1, new SprintPlanning(new SprintPlanningOpdracht()),
+            2, new ScrumBoard(new ScrumBoardOpdracht()),
+            3, new ScrumDaily(new ScrumDailyOpdracht()),
+            4, new SprintReview(new SprintReviewOpdracht()),
+            5, new TiaFinaleKamer(new TiaFinaleOpdracht())
     );
 
     // Spel starten

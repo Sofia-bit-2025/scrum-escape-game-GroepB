@@ -3,7 +3,7 @@ package Kamer;
 import Opdracht.OpdrachtStrategy;
 
 /**
- * Kamer waarin de speler leert hoe Sprint Planning werkt.
+
  * De speler moet de sprint correct plannen via een opdracht.
  */
 public class SprintPlanning extends Kamer {
@@ -11,7 +11,7 @@ public class SprintPlanning extends Kamer {
     private final OpdrachtStrategy opdracht;
 
     /**
-     * Constructor voor de Sprint Planning-kamer.
+
      * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast).
      *
      * @param opdracht De opdracht van deze kamer (strategy pattern).

@@ -10,7 +10,7 @@ public abstract class Kamer {
 
     /**
      * Constructor voor een kamer.
-     * @param //afdwingen dat elke kamer een naam heeft.
+     * @param //afdwingen  elke kamer heeft een naam.
      * verplicht maken via de constructor
      */
     public Kamer(String naam) {
@@ -18,19 +18,19 @@ public abstract class Kamer {
     }
 
     /**
-     * Wordt aangeroepen wanneer de speler de kamer betreedt.
-     * Laat de introductie/instructie van de kamer zien.
+     * Wordt aangeroepen wanneer de speler de kamer binnenloopt.
+     * Laat de introductie  van de kamer zien.
      */
     public abstract void betreed();
 
     /**
-     * Voert de opdracht of uitdaging van deze kamer uit.
-     * @return true als de speler de kamer/opdracht succesvol voltooit, false anders.
+     * Voert de opdracht van deze kamer uit.
+     * @return true als de speler opdracht succesvol voltooit en false anders.
      */
     public abstract boolean start();
 
     /**
-     * Geeft de naam van de kamer terug.
+
      * @return naam van de kamer
      */
     public String getNaam() {
