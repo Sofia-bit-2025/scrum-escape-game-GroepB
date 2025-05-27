@@ -1,5 +1,5 @@
 package Spel;
-
+import Hint.*;
 import Kamer.*;
 import Opdracht.*;
 
@@ -11,11 +11,11 @@ public class GameConsole {
 
     // Injectie van opdrachten via abstractie. Hint wordt binnen de opdrachten gekozen via HintFactory.
     private final Map<Integer, Kamer> kamers = Map.of(
-            1, new SprintPlanning(new SprintPlanningOpdracht()),
-            2, new ScrumBoard(new ScrumBoardOpdracht()),
-            3, new ScrumDaily(new ScrumDailyOpdracht()),
-            4, new SprintReview(new SprintReviewOpdracht()),
-            5, new TiaFinaleKamer(new TiaFinaleOpdracht())
+            1, new SprintPlanning(new SprintPlanningOpdracht(new SprintPlanningHintProvider())),
+            2, new ScrumBoard(new ScrumBoardOpdracht(new ScrumBoardHintProvider())),
+            3, new ScrumDaily(new ScrumDailyOpdracht(new ScrumDailyHintProvider())),
+            4, new SprintReview(new SprintReviewOpdracht(new SprintReviewHintProvider())),
+            5, new TiaFinaleKamer(new TiaFinaleOpdracht(new TiaFinaleKamerHintprovider()))
     );
 
     // Spel starten
@@ -58,6 +58,7 @@ public class GameConsole {
                     System.out.println("Ongeldig kamernummer. Typ bijvoorbeeld: ga naar kamer 2");
                 }
 
+                //spellerstatus bekijken
             } else if (input.equals("status")) {
                 speler.toonStatus();
 
@@ -70,6 +71,7 @@ public class GameConsole {
             }
         }
     }
+
 
     public static void main(String[] args) {
         GameConsole game = new GameConsole();
