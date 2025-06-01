@@ -1,54 +1,55 @@
 package Hint;
 
 /**
- * Een hint die je krijgt tijdens het spel, met een tekst én een type.
- * Bijvoorbeeld een functionele hint ("check het Scrum Board") of een grappige hint ("je doet nog niks").
- * <br>De klasse zorgt dat hints altijd netjes een tekst én een type hebben.
+ * Een hint die tijdens het spel wordt getoond.
+ * Een hint bestaat uit:
+ * <ul>
+ *     <li><b>tekst</b>: de inhoud van de hint, vaak contextueel zoals "ScrumBoard: gebruik je kolommen."</li>
+ *     <li><b>type</b>: het soort hint, zoals "help", "grappig", "info", ...</li>
+ * </ul>
+ *
+ * Beide velden zijn immutable en worden gevalideerd in de constructor.
  */
-
-
-//Deze klasse stelt een hint voor. tekst is de inhoud van de hint zelf
-// en type zegt wat voor soort hint het is
-//Beide velden zijn final, dus ze kunnen na het aanmaken niet meer worden aangepast.
 public class Hint {
     private final String tekst;
     private final String type;
 
-
-    //Deze constructor zorgt ervoor dat je geen lege of foute hint aanmaakt.
-    //Als de hinttekst leeg of null is, gooit hij een foutmelding
+    /**
+     * Maakt een nieuwe Hint aan.
+     *
+     * @param tekst De hinttekst (mag niet null of leeg zijn)
+     * @param type  Het type hint, zoals "grappig" of "help" (mag niet null of leeg zijn)
+     * @throws IllegalArgumentException als tekst of type ongeldig is
+     */
     public Hint(String tekst, String type) {
         if (tekst == null || tekst.isBlank()) {
             throw new IllegalArgumentException("Hinttekst mag niet leeg zijn.");
         }
-
-
-        //Deze regel controleert of het type wel is ingevuld.
-        //Als het leeg of null is, krijg je een foutmelding.
         if (type == null || type.isBlank()) {
             throw new IllegalArgumentException("Hinttype mag niet leeg zijn.");
         }
 
-
-        //slaan de tekst en het type van de hint op in het object
         this.tekst = tekst;
         this.type = type;
     }
 
-
-    //Geeft de tekst van de hint terug.
+    /**
+     * @return De tekstuele inhoud van de hint
+     */
     public String getTekst() {
         return tekst;
     }
 
-
-    //Geeft het type van de hint terug
+    /**
+     * @return Het type van de hint (bijv. "grappig", "help")
+     */
     public String getType() {
         return type;
     }
 
-
-    //Maakt een nette tekstversie van de hint
+    /**
+     * @return Een nette stringrepresentatie zoals "[help] ScrumBoard: gebruik je kolommen."
+     */
     @Override
     public String toString() {
         return "[" + type + "] " + tekst;
