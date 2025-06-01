@@ -1,12 +1,22 @@
 package Opdracht;
 
+import Hint.Hint;
+import Hint.HintFactory;
+
 import java.util.Scanner;
 
-import Hint.HintFactory;
-import Hint.HintProvider;
-
+/**
+ * Een concrete opdracht voor de Sprint Review-kamer.
+ * De speler moet weten welke actie hoort bij een goede review met stakeholders.
+ * Bij een fout antwoord kan hij een relevante hint opvragen via HintFactory.
+ */
 public class SprintReviewOpdracht implements OpdrachtStrategy {
 
+    private final Scanner scanner;
+
+    public SprintReviewOpdracht(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     @Override
     public boolean voerUit() {
@@ -16,7 +26,6 @@ public class SprintReviewOpdracht implements OpdrachtStrategy {
         System.out.println("B) Feedback ontvangen en bespreken");
         System.out.println("C) De sprint beëindigen zonder overleg");
 
-        Scanner scanner = new Scanner(System.in);
         System.out.print("> Kies A, B of C: ");
         String antwoord = scanner.nextLine().trim().toUpperCase();
 
@@ -24,26 +33,24 @@ public class SprintReviewOpdracht implements OpdrachtStrategy {
             antwoord = antwoord.substring(0, 1);
         }
 
-        switch (antwoord) {
-            case "B":
-                System.out.println("Juist! Een Sprint Review draait om feedback en samenwerking.");
-                return true;
-            case "A":
-            case "C":
-                System.out.println("Fout. In de Review wordt vooral teruggeblikt met stakeholders.");
+        if (antwoord.equals("B")) {
+            System.out.println("Juist! Een Sprint Review draait om feedback en samenwerking.");
+            return true;
+        } else if (antwoord.equals("A") || antwoord.equals("C")) {
+            System.out.println("Fout. In de Review wordt vooral teruggeblikt met stakeholders.");
 
-                System.out.print("Wil je een hint? (ja/nee): ");
-                String keuze = scanner.nextLine().trim().toLowerCase();
+            System.out.print("Wil je een hint? (ja/nee): ");
+            String keuze = scanner.nextLine().trim().toLowerCase();
 
-                if (keuze.equals("ja")) {
-                    HintProvider hintProvider = HintFactory.createRandomHintProvider();
-                    System.out.println("Hint: " + hintProvider.getHint());
-                }
-                return false;
+            if (keuze.equals("ja")) {
+                Hint hint = HintFactory.geefRandomHint("SprintReview");
+                System.out.println("Hint (" + hint.getType() + "): " + hint.getTekst());
+            }
+
+            return false;
         }
 
-
+        System.out.println("Ongeldige keuze.");
         return false;
     }
-
 }
