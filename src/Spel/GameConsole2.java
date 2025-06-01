@@ -1,4 +1,5 @@
 package Spel;
+
 import Hint.*;
 import Kamer.*;
 import Opdracht.*;
@@ -8,17 +9,17 @@ import java.util.*;
 public class GameConsole {
     private final Scanner scanner = new Scanner(System.in);
     private final Speler speler = new Speler();
+    private final Map<Integer, Kamer> kamers = new LinkedHashMap<>();
 
-    // Injectie van opdrachten via abstractie. Hint wordt binnen de opdrachten gekozen via HintFactory.
-    private final Map<Integer, Kamer> kamers = Map.of(
-            1, new SprintPlanning(new SprintPlanningOpdracht()),
-            2, new ScrumBoard(new ScrumBoardOpdracht()),
-            3, new ScrumDaily(new ScrumDailyOpdracht()),
-            4, new SprintReview(new SprintReviewOpdracht()),
-            5, new TiaFinaleKamer(new TiaFinaleOpdracht())
-    );
+    public GameConsole() {
+        // Kamers aanmaken met bijbehorende opdrachten (scanner wordt meegegeven)
+        kamers.put(1, new SprintPlanning(new SprintPlanningOpdracht(scanner)));
+        kamers.put(2, new ScrumBoard(new ScrumBoardOpdracht(scanner)));
+        kamers.put(3, new ScrumDaily(new ScrumDailyOpdracht(scanner)));
+        kamers.put(4, new SprintReview(new SprintReviewOpdracht(scanner)));
+        kamers.put(5, new TiaFinaleKamer(new TiaFinaleOpdracht(scanner)));
+    }
 
-    // Spel starten
     public void start() {
         System.out.println(" Welkom bij Scrum Escape Game!");
         System.out.println("Typ bijvoorbeeld: ga naar kamer 1, status of stop.");
@@ -42,8 +43,8 @@ public class GameConsole {
                     }
 
                     Kamer kamer = kamers.get(nummer);
-                    kamer.betreed();               // polymorf gedrag
-                    boolean geslaagd = kamer.start(); // polymorf gedrag
+                    kamer.betreed();
+                    boolean geslaagd = kamer.start();
 
                     if (geslaagd) {
                         speler.kamerGehaald(nummer);
@@ -51,14 +52,13 @@ public class GameConsole {
                     } else {
                         System.out.println(" Opdracht niet gehaald. Probeer opnieuw.");
                         System.out.println(" Als je een hint koos, heb je die net gezien.");
-                        // TODO: hier later monster activeren zoals 'Vertraging' o.i.d.
+                        // TODO: hier later monster activeren
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Ongeldig kamernummer. Typ bijvoorbeeld: ga naar kamer 2");
+                    System.out.println(" Ongeldig kamernummer. Typ bijvoorbeeld: ga naar kamer 2");
                 }
 
-                //spellerstatus bekijken
             } else if (input.equals("status")) {
                 speler.toonStatus();
 
@@ -71,7 +71,6 @@ public class GameConsole {
             }
         }
     }
-
 
     public static void main(String[] args) {
         GameConsole game = new GameConsole();
