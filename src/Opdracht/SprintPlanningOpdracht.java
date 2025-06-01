@@ -2,49 +2,57 @@ package Opdracht;
 
 import java.util.Scanner;
 
-import Hint.HintFactory;
-import Hint.HintProvider;
+/**
+ * Deze opdracht test of je snapt wat je wel en niet plant in een sprint.
+ * Je krijgt een meerkeuzevraag over sprintplanning.
+ * <br>Handig om te leren dat je alleen plant wat je team ook echt af kan krijgen.
+ */
 
-public class SprintPlanningOpdracht implements OpdrachtStrategy {
 
 
+//Zorgt ervoor dat de opdracht gekoppeld is aan de kamer SprintPlanning
+// ende speler via de scanner input kan geven.
+public class SprintPlanningOpdracht extends InteractieveOpdracht {
+    public SprintPlanningOpdracht(Scanner scanner) {
+        super(scanner, "SprintPlanning"); // correcte context meegeven
+    }
 
-    //vraag en keuzemogelijkheden tonen
+
+    //Geeft de vraag die aan de speler wordt gesteld tijdens deze opdracht
     @Override
-    public boolean voerUit() {
-        System.out.println("Wat plan je in de sprint?");
-        System.out.println("A) Bugs oplossen");
-        System.out.println("B) Wat het team kan afronden");
-        System.out.println("C) Alles in de backlog");
+    protected String getVraag() {
+        return "Wat plan je in de sprint?";
+    }
 
-        //antwoorden ophalen via scanner
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("> Kies A, B of C: ");
-        String antwoord = scanner.nextLine().trim().toUpperCase();
 
-        // Controle op eerste letter
-        if (antwoord.length() > 0) {
-            antwoord = antwoord.substring(0, 1);
-        }
+    //Deze methode levert de keuzemogelijkheden meerkeuze antwoorden
+    // die de speler te zien krijgt bij de vraag.
+    @Override
+    protected String[] getOpties() {
+        return new String[] {
+                "Bugs oplossen",
+                "Wat het team kan afronden",
+                "Alles in de backlog"
+        };
+    }
 
-        switch (antwoord) {
-            case "B":
-                System.out.println("Correct! Je plant alleen wat het team realistisch kan afronden.");
-                return true;
-            case "A":
-            case "C":
-                System.out.println("Fout! Je plant geen willekeurige bugs of alles uit de backlog.");
 
-                System.out.print("Wil je een hint? (ja/nee): ");
-                String keuze = scanner.nextLine().trim().toLowerCase();
+//Geeft aan wat het correcte antwoord is op de vraag (in dit geval optie B).
+    @Override
+    protected String getJuisteAntwoord() {
+        return "B";
+    }
 
-                if (keuze.equals("ja")) {
-                    HintProvider hintProvider = HintFactory.createRandomHintProvider();
-                    System.out.println("Hint: " + hintProvider.getHint());
-                }
+    //Geeft de feedbacktekst terug die getoond wordt als de speler het juiste antwoord heeft gekozen.
+    @Override
+    protected String getFeedbackCorrect() {
+        return "Correct! In een sprint plan je alleen wat het team realistisch kan afronden.";
+    }
 
-                return false;
-        }
-        return false;
+    //Functie van deze methode:
+    //Geeft de foutmelding die wordt getoond als de speler een verkeerd antwoord kiest.
+    @Override
+    protected String getFeedbackFout() {
+        return "Fout! Je plant alleen datgene wat het team kan afronden, niet willekeurig alles of alle bugs.";
     }
 }

@@ -3,40 +3,17 @@ package Kamer;
 import Opdracht.OpdrachtStrategy;
 
 /**
- * De finale kamer waarin de speler een reeks vragen beantwoordt.
- * Deze kamer bepaalt of de speler het spel succesvol afrondt.
+ * Dit is de laatste kamer van het spel – de grote afsluiter.
+ * Hier test je of je echt hebt begrepen hoe Scrum werkt, vooral waarom het iteratief is.
+ * <br>Perfect om alles wat je geleerd hebt samen te brengen.
  */
-public class TiaFinaleKamer extends Kamer {
-    private final String instructie;
-    private final OpdrachtStrategy opdracht;
+public class TiaFinaleKamer extends BasisKamer {
 
-    /**
-     * Constructor voor de finale kamer van het spel.
-     * De opdrachtstrategie wordt van buitenaf geïnjecteerd (DIP).
-     *
-     * @param opdracht De afsluitende opdracht (via Strategy Pattern)
-     */
+
+    //Deze constructor maakt de laatste kamer van het spel aan
+    //geeft een vaste naam en instructie mee
+    //zorgt dat de juiste opdrachtstrategie uitgevoerd wordt wanneer de speler deze eindronde ingaat.
     public TiaFinaleKamer(OpdrachtStrategy opdracht) {
-        super("Finale Kamer: TIA");
-        this.instructie = "Beantwoord vragen.";
-        this.opdracht = opdracht;
-    }
-
-    /**
-     * Toont de naam en instructie bij het betreden van de kamer.
-     */
-    @Override
-    public void betreed() {
-        System.out.println("Je betreedt: " + getNaam());
-        System.out.println(instructie);
-    }
-
-    /**
-     * Voert de opdracht uit en retourneert of deze succesvol is.
-     * @return true als speler correct antwoordt, anders false
-     */
-    @Override
-    public boolean start() {
-        return opdracht.voerUit();
+        super("TiaFinaleKamer", "Beantwoord finale vragen over Scrum.", opdracht);
     }
 }

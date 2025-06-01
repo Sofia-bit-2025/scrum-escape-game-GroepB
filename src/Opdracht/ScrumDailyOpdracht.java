@@ -2,49 +2,53 @@ package Opdracht;
 
 import java.util.Scanner;
 
-import Hint.HintFactory;
-import Hint.HintProvider;
+/**
+ * Deze opdracht checkt of je weet wat er besproken wordt tijdens een Daily Scrum.
+ * Je krijgt een meerkeuzevraag over de standaardinhoud van een Daily.
+ * <br>Super handig om te oefenen wat je wel of niet moet zeggen in zo’n meeting.
+ */
 
 
+//De constructor maakt een opdracht aan die hoort bij de Daily Scrum kamer.
+//Hij geeft ook meteen de juiste context DailyScrum
+// mee aan de bovenliggende InteractieveOpdracht, zodat hints en filters weten waar het over gaat.
+public class ScrumDailyOpdracht extends InteractieveOpdracht {
+    public ScrumDailyOpdracht(Scanner scanner) {
+        super(scanner, "DailyScrum");
+    }
 
-public class ScrumDailyOpdracht implements OpdrachtStrategy {
-
-
-
-
-
-
-    //vraag
+    //Deze methode geeft simpelweg de vraag terug die aan de speler wordt gesteld in de opdracht.
+    //Hier: wat je bespreekt tijdens een Daily Scrum  Handig om weer te geven in de CLI.
     @Override
-    public boolean voerUit() {
-        System.out.println("Opdracht: Wat wordt besproken tijdens een Daily Scrum?");
-        System.out.println("A) Gedetailleerde sprintplanning");
-        System.out.println("B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades");
-        System.out.println("C) Retrospective feedback");
+    protected String getVraag() {
+        return "Opdracht: Wat wordt besproken tijdens een Daily Scrum?";
+    }
 
-        // input vragen
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("> Jouw antwoord: ");
-        String antwoord = scanner.nextLine().trim().toUpperCase();//spatie weghalen en naar hoofdletters omzetten
+    //Deze methode geeft de drie antwoordopties terug waaruit de speler kan kiezen.
+    //Wordt gebruikt om de meerkeuzevraag op het scherm te tonen
+    @Override
+    protected String[] getOpties() {
+        return new String[] {
+                "Gedetailleerde sprintplanning",
+                "Wat ieder teamlid gedaan heeft, gaat doen, en blokkades",
+                "Retrospective feedback"
+        };
+    }
 
-        // Alleen eerste letter checken
-        if (antwoord.length() > 0) {
-            antwoord = antwoord.substring(0, 1);
-        }
+    //Deze methode geeft aan wat het juiste antwoord is op de vraag
+    @Override
+    protected String getJuisteAntwoord() {
+        return "B";
+    }
 
-        if (antwoord.equals("B")) {
-            System.out.println("Correct! Dat is precies de bedoeling van een Daily Scrum.");
-            return true;
-        } else {
-            System.out.println("Fout. Het juiste antwoord was: B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades.");
-            System.out.print("Wil je een hint? (ja/nee): ");
-            String keuze = scanner.nextLine().trim().toLowerCase();
+    //Geeft de tekst terug die de speler ziet als die het juiste antwoord heeft gegeven.
+    @Override
+    protected String getFeedbackCorrect() {
+        return "Correct! De Daily Scrum gaat precies daarover.";
+    }
 
-            if (keuze.equals("ja")) {
-                HintProvider hintProvider = HintFactory.createRandomHintProvider();
-                System.out.println("Hint: " + hintProvider.getHint());
-            }
-            return false;
-        }
+    @Override
+    protected String getFeedbackFout() {
+        return "Fout. De juiste inhoud is: B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades.";
     }
 }

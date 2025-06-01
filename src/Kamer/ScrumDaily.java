@@ -3,40 +3,16 @@ package Kamer;
 import Opdracht.OpdrachtStrategy;
 
 /**
-
- * De speler moet de juiste statusupdate geven als opdracht.
+ * Een kamer waar je een Daily Scrum oefent.
+ * In deze kamer leer je hoe je kort vertelt wat je gedaan hebt, wat je gaat doen
+ * en of je ergens tegenaan loopt.
+ * <br>De opdracht wordt als strategie meegegeven, zodat het makkelijk te vervangen of te testen is.
  */
-public class ScrumDaily extends Kamer {
-    private final String instructie;
-    private final OpdrachtStrategy opdracht;
+public class ScrumDaily extends BasisKamer {
 
-    /**
-     * Constructor voor de DailyScrum kamer.
-     * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast)
-     *
-     * @param opdracht  (via strategy pattern)
-     */
+
+    //Deze constructor maakt een ScrumDaily kamer aan met de naam DailyScrum en een vaste instructie.
     public ScrumDaily(OpdrachtStrategy opdracht) {
-        super("Daily Scrum");
-        this.instructie = "Iedereen geeft een korte statusupdate.";
-        this.opdracht = opdracht; // geen concrete implementatie aanmaken hier
-    }
-
-    /**
-     * Toont uitleg bij het enter van de kamer.
-     */
-    @Override
-    public void betreed() {
-        System.out.println("Je betreedt: " + getNaam());
-        System.out.println(instructie);
-    }
-
-    /**
-
-     * @return true als opdracht goed is uitgevoerd
-     */
-    @Override
-    public boolean start() {
-        return opdracht.voerUit(); // Strategy pattern toegepast
+        super("DailyScrum", "Iedereen geeft een korte statusupdate.", opdracht);
     }
 }

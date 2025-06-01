@@ -3,40 +3,16 @@ package Kamer;
 import Opdracht.OpdrachtStrategy;
 
 /**
-
- * De speler moet de sprint correct plannen via een opdracht.
+ * Een kamer waarin je leert hoe je een sprint moet plannen.
+ * Hier ontdek je hoe je als team keuzes maakt over wat haalbaar is binnen de sprinttijd.
+ * <br>De opdracht wordt via een strategie meegegeven, zodat je dit flexibel kunt aanpassen.
  */
-public class SprintPlanning extends Kamer {
-    private final String instructie;
-    private final OpdrachtStrategy opdracht;
+public class SprintPlanning extends BasisKamer {
 
-    /**
 
-     * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast).
-     *
-     * @param opdracht De opdracht van deze kamer (strategy pattern).
-     */
+    //Deze constructor maakt een SprintPlanning-kamer aan.
+    // Hij stelt de naam in als SprintPlanning  en geeft een instructie mee.
     public SprintPlanning(OpdrachtStrategy opdracht) {
-        super("Sprint Planning");
-        this.instructie = "Plan de sprint.";
-        this.opdracht = opdracht; // alleen abstractie gebruiken
-    }
-
-    /**
-     * Laat een instructie zien wanneer de kamer betreden wordt.
-     */
-    @Override
-    public void betreed() {
-        System.out.println("Je betreedt: " + getNaam());
-        System.out.println(instructie);
-    }
-
-    /**
-     * Voert de opdracht uit en retourneert of het gelukt is.
-     * @return true als speler de opdracht goed uitvoert.
-     */
-    @Override
-    public boolean start() {
-        return opdracht.voerUit(); // Strategy pattern toegepast
+        super("SprintPlanning", "Plan de sprint.", opdracht);
     }
 }

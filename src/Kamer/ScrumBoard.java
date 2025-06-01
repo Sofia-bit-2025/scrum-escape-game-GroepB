@@ -3,38 +3,16 @@ package Kamer;
 import Opdracht.OpdrachtStrategy;
 
 /**
- * Kamer waarin de speler leert hoe een Scrum Board werkt.
- * De speler moet de opdracht correct uitvoeren om verder te mogen.
+ * Een kamer waar je leert hoe een Scrum Board werkt.
+ * Je ziet hier een korte uitleg over het bord (To Do, Doing, Done),
+ * en voert daarna een opdracht uit die daarbij hoort.
+ * <br>De opdracht zelf wordt los meegegeven via een strategie, dus je kunt dit makkelijk aanpassen of testen.
  */
-public class ScrumBoard extends Kamer {
-    private final String instructie;
-    private final OpdrachtStrategy opdracht;
+public class ScrumBoard extends BasisKamer {
 
-    /**
-     * Constructor voor de ScrumBoard-kamer.
-     * @param opdracht De opdrachtstrategie die bij deze kamer hoort (via Strategy Pattern en DIP).
-     */
+
+    //Deze constructor maakt een ScrumBoard kamer aan met een bijbehorende opdrachtstrategie
     public ScrumBoard(OpdrachtStrategy opdracht) {
-        super("Scrum Board");
-        this.instructie = "Richt het bord in met taken en user stories.";
-        this.opdracht = opdracht; // Geen concrete opdracht maken hier dus wegens DIP
-    }
-
-    /**
-     * Laat de speler weten dat hij in de ScrumBoard kamer is.
-     */
-    @Override
-    public void betreed() {
-        System.out.println("Je betreedt: " + getNaam());
-        System.out.println(instructie);
-    }
-
-    /**
-
-     * @return true als opdracht succesvol werd uitgevoerd
-     */
-    @Override
-    public boolean start() {
-        return opdracht.voerUit(); // Strategy Pattern toegepast hier
+        super("ScrumBoard", "Richt het bord in met taken en user stories.", opdracht);
     }
 }

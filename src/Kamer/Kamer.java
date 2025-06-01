@@ -1,39 +1,50 @@
 package Kamer;
 
 /**
- * Abstracte basis voor elke kamer in het spel.
- * Dwingt structuur af voor naam, instructie en opdrachtuitvoering.
- * Past bij SOLID (OCP & DIP) en maakt polymorfie mogelijk.
+ * Kamer is de basis voor elke ruimte in het spel die je kunt betreden.
+ * Elke kamer heeft een naam, toont iets als je binnenkomt (via {@code betreed()})
+ * en voert een opdracht uit (via {@code start()}).
+ * <br>Subklassen zoals {@code ScrumBoard} of {@code SprintPlanning} geven hun eigen gedrag hieraan mee.
+ * <br>Deze abstracte klasse zorgt dus voor structuur, zodat elke kamer netjes dezelfde basisregels volgt.
+ * <br>Goed voor uitbreidbaarheid en overzicht: je kunt altijd een nieuwe kamer maken door deze klasse te erven.
  */
 public abstract class Kamer {
-    protected final String naam;
 
-    /**
-     * Constructor voor een kamer.
-     * @param //afdwingen  elke kamer heeft een naam.
-     * verplicht maken via de constructor
-     */
+    // Naam van de kamer bijvoorbeeld SprintReview
+    private final String naam;
+
+
+
+    //Deze constructor maakt een kamer aan met een naam.
+    // Als de naam leeg of null is, gooit hij een foutmelding.
     public Kamer(String naam) {
+        if (naam == null || naam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Naam van kamer mag niet leeg of null zijn.");
+        }
         this.naam = naam;
     }
 
-    /**
-     * Wordt aangeroepen wanneer de speler de kamer binnenloopt.
-     * Laat de introductie  van de kamer zien.
-     */
+
+
+    //Deze abstracte methode zegt
+    // Elke kamer moet zelf bepalen wat er gebeurt als je die binnenkomt.
     public abstract void betreed();
 
-    /**
-     * Voert de opdracht van deze kamer uit.
-     * @return true als de speler opdracht succesvol voltooit en false anders.
-     */
+
+    //Deze methode dwingt af dat elke kamer zelf bepaalt
+    // wat er gebeurt als een speler begint met de opdracht
     public abstract boolean start();
 
-    /**
 
-     * @return naam van de kamer
-     */
-    public String getNaam() {
+
+    //Geeft  de naam van de kamer terug
+    public final String getNaam() {
         return naam;
+    }
+
+    //een leesbare tekstversie van het kamerobject terug
+    @Override
+    public String toString() {
+        return "Kamer: " + naam;
     }
 }
