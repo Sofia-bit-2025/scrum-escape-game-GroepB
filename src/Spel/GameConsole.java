@@ -1,4 +1,3 @@
-package Spel;
 import Hint.*;
 import Kamer.*;
 import Opdracht.*;
