@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/src/scrum-escape-game.iml" filepath="$PROJECT_DIR$/src/scrum-escape-game.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/scrumescapegamegroepB.iml" filepath="$PROJECT_DIR$/.idea/scrumescapegamegroepB.iml" />
     </modules>
   </component>
 </project>
