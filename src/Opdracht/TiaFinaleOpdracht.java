@@ -1,13 +1,22 @@
 package Opdracht;
 
+import Hint.Hint;
+import Hint.HintFactory;
+
 import java.util.Scanner;
 
-import Hint.HintFactory;
-import Hint.HintProvider;
-
+/**
+ * Finale opdracht voor de TIA-kamer.
+ * Test of de speler begrijpt waarom Scrum iteratief werkt.
+ * Bij een fout antwoord kan een hint worden opgevraagd, gefilterd op context "Finale".
+ */
 public class TiaFinaleOpdracht implements OpdrachtStrategy {
 
+    private final Scanner scanner;
 
+    public TiaFinaleOpdracht(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     @Override
     public boolean voerUit() {
@@ -16,37 +25,31 @@ public class TiaFinaleOpdracht implements OpdrachtStrategy {
         System.out.println("B) Om geleidelijk feedback te verwerken en continu te verbeteren");
         System.out.println("C) Omdat teams niet kunnen plannen");
 
-        Scanner scanner = new Scanner(System.in);
         System.out.print("> Kies A, B of C: ");
-
         String antwoord = scanner.nextLine().trim().toUpperCase();
 
-        // Alleen eerste letter gebruiken
         if (antwoord.length() > 0) {
             antwoord = antwoord.substring(0, 1);
         }
 
-        switch (antwoord) {
-            case "B":
-                System.out.println("Juist! Scrum gebruikt iteraties om continu te verbeteren.");
-                return true;
-            case "A":
-            case "C":
-                System.out.println("Fout. Scrum gebruikt iteraties om steeds kleine stappen te verbeteren.");
+        if (antwoord.equals("B")) {
+            System.out.println("Juist! Scrum gebruikt iteraties om continu te verbeteren.");
+            return true;
+        } else if (antwoord.equals("A") || antwoord.equals("C")) {
+            System.out.println("Fout. Scrum gebruikt iteraties om steeds kleine stappen te verbeteren.");
 
-                System.out.print("Wil je een hint? (ja/nee): ");
-                String keuze = scanner.nextLine().trim().toLowerCase();
+            System.out.print("Wil je een hint? (ja/nee): ");
+            String keuze = scanner.nextLine().trim().toLowerCase();
 
-                if (keuze.equals("ja")) {
-                    HintProvider hintProvider = HintFactory.createRandomHintProvider();
-                    System.out.println("Hint: " + hintProvider.getHint());
-                }
+            if (keuze.equals("ja")) {
+                Hint hint = HintFactory.geefRandomHint("Finale");
+                System.out.println("Hint (" + hint.getType() + "): " + hint.getTekst());
+            }
 
-                return false;  // altijd returnen, ongeacht of speler een hint wil
+            return false;
         }
+
+        System.out.println("Ongeldige keuze.");
         return false;
     }
 }
-
-
-
