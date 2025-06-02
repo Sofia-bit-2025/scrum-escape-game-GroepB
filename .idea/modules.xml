@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/src/scrum-escape-game.iml" filepath="$PROJECT_DIR$/src/scrum-escape-game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scrum-escape-game-GroepB.iml" filepath="$PROJECT_DIR$/scrum-escape-game-GroepB.iml" />
     </modules>
   </component>
 </project>
