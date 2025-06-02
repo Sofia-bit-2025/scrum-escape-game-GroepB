@@ -17,23 +17,23 @@ public class KamerCommando {
  }
 
 
-    public void verwerkKamerCommando(String input) {
+    public boolean verwerkKamerCommando(String input) {
         if (input.startsWith("ga naar kamer")) {
             try {
                 int nummer = Integer.parseInt(input.replaceAll("\\D+", ""));
                 if (!kamers.containsKey(nummer)) {
                     System.out.println("Die kamer bestaat niet.");
-                    return;
+                    return false;
                 }
                 if (!spelerService.magNaarKamer(nummer)) {
                     System.out.println("Je moet eerst eerdere kamer(s) halen.");
-                    return;
+                    return false;
                 }
 
                 Kamer kamer = kamers.get(nummer);
                 Deur deur = deuren.get(nummer);
 
-                // Show closed door before entering
+
                 deur.toonGeslotenDeur();
 
                 kamer.betreed();
@@ -61,5 +61,6 @@ public class KamerCommando {
         } else {
             System.out.println("Onbekend commando. Typ 'help' voor opties.");
         }
+        return false;
     }
 }

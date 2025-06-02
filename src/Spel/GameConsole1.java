@@ -10,8 +10,13 @@ import java.util.Scanner;
 /**
  * Hoofdklasse voor de Scrum Escape Game CLI.
  * Stuurt login, kamerlogica, hints, monsters, deuren en spelerstatus aan.
+ * Zorgt ervoor dat kamer-logica, hints en opdrachten correct worden aangeroepen.
  */
 public class GameConsole1 {
+    public static void main(String[] args) {
+        new GameConsole1().start();
+    }
+
     private final Scanner scanner = new Scanner(System.in);
     private final Speler speler;
     private final SpelerService spelerService;
@@ -21,26 +26,25 @@ public class GameConsole1 {
     private final KamerCommando kamerCommando;
     private final HelpMenu helpMenu = new HelpMenu();
 
-    // Monsters per kamer ..
+    //  monster activeert deur na fout
     private final Map<Integer, MonsterBasis> monsters = new HashMap<>();
 
     public GameConsole1() {
         this.speler = new Opstart().start();
         this.spelerService = new SpelerService(speler);
-        this.kamers = FactoryKamer.maakKamers();
+        this.kamers = FactoryKamer.maakKamers();  // Elke kamer krijgt een opdracht met hint
         this.spelerStatus = new SpelerStatus(speler);
 
         for (int kamerNr : kamers.keySet()) {
             Deur deur = new Deur();
             deuren.put(kamerNr, deur);
 
-            // alleen MonsterBasis gebruiken
+            // Monster koppelen aan deur via observerpattern
             MonsterBasis monster = new ScopeCreep(StrategieFactory.maakStrategie("spring"));
-            monsters.put(kamerNr, monster);
-
-            // koppel deur als waarnemer aan monster
             monster.voegWaarnemersToe(deur);
+            monsters.put(kamerNr, monster);
         }
+
 
         this.kamerCommando = new KamerCommando(kamers, deuren, spelerService, scanner);
     }
@@ -60,12 +64,24 @@ public class GameConsole1 {
                 }
                 case "help" -> helpMenu.toonHelpMenu();
                 case "status" -> spelerStatus.toonStatus();
-                default -> kamerCommando.verwerkKamerCommando(input);
+                default -> {
+                    boolean geslaagd = kamerCommando.verwerkKamerCommando(input);
+                    if (!geslaagd) {
+                        int kamerNr = haalKamernummerUitInput(input);
+                        if (kamerNr != -1 && monsters.containsKey(kamerNr)) {
+                            monsters.get(kamerNr).valAan(); // activeer monster bij fout
+                        }
+                    }
+                }
             }
         }
     }
 
-    public static void main(String[] args) {
-        new GameConsole1().start();
+    private int haalKamernummerUitInput(String input) {
+        try {
+            return Integer.parseInt(input.replaceAll("\\D+", ""));
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 }
