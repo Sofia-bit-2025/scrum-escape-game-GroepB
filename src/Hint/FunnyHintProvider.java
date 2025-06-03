@@ -37,7 +37,7 @@ public class FunnyHintProvider implements HintProvider {
                 new Hint("Een fout is gewoon een user story met een twist.", "grappig")
         );
 
-        // Filter op context via prefix (mag ook met ContextPrefixFilter als je die erin injecteert)
+        // Filter op context via prefix
         for (Hint hint : allHints) {
             if (hint.getTekst().startsWith(context + ":")) {
                 result.add(hint);

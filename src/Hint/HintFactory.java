@@ -41,10 +41,6 @@ public class HintFactory {
 
     /**
      * Selecteert willekeurig een provider uit de lijst.
-     * Handig als je toegang tot een concrete HintProvider wilt.
-     *
-     * @return Een willekeurige HintProvider
-     * @throws IllegalStateException als er geen providers zijn
      */
     public static HintProvider createRandomHintProvider() {
         if (providers.isEmpty()) {

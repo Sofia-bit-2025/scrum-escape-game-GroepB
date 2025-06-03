@@ -2,8 +2,8 @@ package Kamer;
 
 /**
  * Abstracte basis voor elke kamer in het spel.
- * Dwingt structuur af voor naam, instructie en opdrachtuitvoering.
- * Past bij SOLID (OCP & DIP) en maakt polymorfie mogelijk.
+ * dwingt structuur af voor naam, instructie en opdrachtuitvoering.
+ * Past bij SOLID OCP & DIP en maakt polymorfie mogelijk.
  */
 public abstract class Kamer {
     protected final String naam;

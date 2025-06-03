@@ -7,10 +7,6 @@ import java.util.Scanner;
 
 /**
  * Een abstracte opdracht waarbij de speler een meerkeuzevraag moet beantwoorden.
- * Wordt gebruikt in kamers zoals ScrumBoard of SprintPlanning.
- * <p>
- * Bij een fout antwoord krijgt de speler optioneel een hint via {@link HintFactory},
- * gebaseerd op de context van de opdracht.
  */
 public abstract class InteractieveOpdracht implements OpdrachtStrategy {
 
@@ -19,9 +15,6 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
 
     /**
      * Constructor voor een interactieve opdracht.
-     *
-     * @param scanner De Scanner voor gebruikersinput (mag niet null zijn)
-     * @param context De naam van de kamer of situatie waarin deze opdracht wordt uitgevoerd
      */
     public InteractieveOpdracht(Scanner scanner, String context) {
         if (scanner == null) throw new IllegalArgumentException("Scanner mag niet null zijn.");

@@ -7,9 +7,6 @@ import java.util.Scanner;
 
 /**
  * Een concrete opdracht voor de ScrumBoard-kamer.
- * De speler moet aangeven op welk deel van het Scrum Board een taak thuishoort.
- * <br>Hints worden via HintFactory opgehaald en zijn afhankelijk van de context "ScrumBoard".
- * <br>Volledig in lijn met User Story 20 en het Dependency Inversion Principle.
  */
 public class ScrumBoardOpdracht implements OpdrachtStrategy {
 

@@ -12,7 +12,7 @@ public class ScrumBoard extends Kamer {
 
     /**
      * Constructor voor de ScrumBoard-kamer.
-     * @param opdracht De opdrachtstrategie die bij deze kamer hoort (via Strategy Pattern en DIP).
+     * @param opdracht De opdrachtstrategie die bij deze kamer hoort via Strategy Pattern en DIP.
      */
     public ScrumBoard(OpdrachtStrategy opdracht) {
         super("Scrum Board");

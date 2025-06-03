@@ -6,9 +6,7 @@ import Hint.HintFactory;
 import java.util.Scanner;
 
 /**
- * Finale opdracht voor de TIA-kamer.
- * Test of de speler begrijpt waarom Scrum iteratief werkt.
- * Bij een fout antwoord kan een hint worden opgevraagd, gefilterd op context "Finale".
+ * Finale opdracht voor de TIAkamer.
  */
 public class TiaFinaleOpdracht implements OpdrachtStrategy {
 

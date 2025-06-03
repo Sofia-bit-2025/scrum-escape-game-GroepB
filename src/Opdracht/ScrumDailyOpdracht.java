@@ -6,9 +6,7 @@ import Hint.HintFactory;
 import java.util.Scanner;
 
 /**
- * Een concrete opdracht voor de Daily Scrum-kamer.
- * De speler moet weten wat er tijdens een Daily Scrum besproken wordt.
- * Bij een fout antwoord kan hij een hint krijgen, gefilterd op context "DailyScrum".
+ * Een concrete opdracht voor de Daily Scrumkamer.
  */
 public class ScrumDailyOpdracht implements OpdrachtStrategy {
 

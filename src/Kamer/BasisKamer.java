@@ -5,10 +5,9 @@ import java.util.Objects;
 
 /**
  * BasisKamer is een soort blueprint voor alle kamers die een opdracht uitvoeren.
- * Wanneer je een kamer binnenkomt, laat deze klasse eerst wat uitleg zien (de instructie),
+ * Wanneer je een kamer binnenkomt, laat deze klasse eerst wat uitleg zien
  * en daarna voert hij de opdracht uit die bij die kamer hoort.
  * <br>Deze opdracht komt via het Strategy Pattern, dus elke kamer kan z’n eigen opdrachtstrategie hebben.
- * <br>Ideaal voor uitbreidbaarheid en om logica van kamers en opdrachten los te koppelen (DIP).
  */
 public abstract class BasisKamer extends Kamer {
 
@@ -52,7 +51,7 @@ public abstract class BasisKamer extends Kamer {
 
 
     //Deze methode start de opdracht van de kamer
-    //roept gewoon de voerUit()-methode aan op de opdrachtstrategie
+    //roept gewoon de voerUit() methode aan op de opdrachtstrategie
     @Override
     public boolean start() {
         return opdracht.voerUit();

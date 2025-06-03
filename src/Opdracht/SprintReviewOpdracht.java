@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 /**
  * Een concrete opdracht voor de Sprint Review-kamer.
- * De speler moet weten welke actie hoort bij een goede review met stakeholders.
- * Bij een fout antwoord kan hij een relevante hint opvragen via HintFactory.
  */
 public class SprintReviewOpdracht implements OpdrachtStrategy {
 

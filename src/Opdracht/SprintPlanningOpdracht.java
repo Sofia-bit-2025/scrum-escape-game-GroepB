@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 /**
  * Opdracht voor de Sprint Planning-kamer.
- * De speler moet weten wat je realistisch plant in een sprint.
- * Bij een fout antwoord kan hij een hint krijgen (context: "SprintPlanning").
  */
 public class SprintPlanningOpdracht implements OpdrachtStrategy {
 
