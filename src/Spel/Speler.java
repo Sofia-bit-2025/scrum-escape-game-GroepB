@@ -30,6 +30,10 @@ public class Speler {
         return huidigeKamer;
     }
 
+    public void setHuidigeKamer(int kamerNummer) {
+        this.huidigeKamer = kamerNummer;
+    }
+
     public void kamerGehaald(int kamerNummer) {
         gehaaldeKamers.add(kamerNummer);
         huidigeKamer = kamerNummer;
