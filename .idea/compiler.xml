@@ -7,8 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="src" />
-        <module name="scrum-escape-game" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="scrum-escape-game" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
