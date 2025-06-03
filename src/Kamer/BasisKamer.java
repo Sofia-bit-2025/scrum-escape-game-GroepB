@@ -4,7 +4,7 @@ import Opdracht.OpdrachtStrategy;
 import java.util.Objects;
 
 /**
- * BasisKamer is een soort blueprint voor alle kamers die een opdracht uitvoeren.
+
  * Wanneer je een kamer binnenkomt, laat deze klasse eerst wat uitleg zien
  * en daarna voert hij de opdracht uit die bij die kamer hoort.
  * <br>Deze opdracht komt via het Strategy Pattern, dus elke kamer kan z’n eigen opdrachtstrategie hebben.

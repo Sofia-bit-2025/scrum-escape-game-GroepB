@@ -13,8 +13,6 @@ public class ScrumDaily extends Kamer {
     /**
      * Constructor voor de DailyScrum kamer.
      * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast)
-     *
-     * @param opdracht  (via strategy pattern)
      */
     public ScrumDaily(OpdrachtStrategy opdracht) {
         super("Daily Scrum");

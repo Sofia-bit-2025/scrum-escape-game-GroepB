@@ -8,29 +8,18 @@ package Kamer;
 public abstract class Kamer {
     protected final String naam;
 
-    /**
-     * Constructor voor een kamer.
-     * @param //afdwingen  elke kamer heeft een naam.
-     * verplicht maken via de constructor
-     */
+
     public Kamer(String naam) {
         this.naam = naam;
     }
 
-    /**
-     * Wordt aangeroepen wanneer de speler de kamer binnenloopt.
-     * Laat de introductie  van de kamer zien.
-     */
+
     public abstract void betreed();
 
-    /**
-     * Voert de opdracht van deze kamer uit.
-     * @return true als de speler opdracht succesvol voltooit en false anders.
-     */
+
     public abstract boolean start();
 
     /**
-
      * @return naam van de kamer
      */
     public String getNaam() {

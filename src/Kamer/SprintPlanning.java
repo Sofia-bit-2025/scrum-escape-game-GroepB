@@ -11,9 +11,7 @@ public class SprintPlanning extends Kamer {
     private final OpdrachtStrategy opdracht;
 
     /**
-
      * De opdracht wordt van buitenaf geïnjecteerd (DIP toegepast).
-     *
      * @param opdracht De opdracht van deze kamer (strategy pattern).
      */
     public SprintPlanning(OpdrachtStrategy opdracht) {
