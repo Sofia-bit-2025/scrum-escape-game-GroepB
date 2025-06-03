@@ -5,8 +5,6 @@ import java.util.Random;
 
 /**
  * HintFactory bepaalt op willekeurige wijze welke concrete HintProvider gekozen wordt.
- * Dit is een toepassing van het Factory Pattern met het Dependency Inversion Principle (DIP).
- * Kamers en opdrachten zijn alleen afhankelijk van de HintProvider-interface.
  */
 public class HintFactory {
 
@@ -19,10 +17,6 @@ public class HintFactory {
 
     /**
      * Haalt een hint op die past bij de opgegeven context.
-     * Hiervoor wordt willekeurig een provider gekozen, en daarbinnen een hint die de context als prefix heeft.
-     *
-     * @param context De naam van de kamer of spelsituatie (zoals "ScrumBoard", "SprintPlanning", ...)
-     * @return Een willekeurige, contextuele hint. Als er geen passende hint is, een neutrale fallback.
      */
     public static Hint geefRandomHint(String context) {
         if (providers.isEmpty()) {
