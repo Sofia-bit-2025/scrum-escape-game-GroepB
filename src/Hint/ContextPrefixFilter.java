@@ -2,9 +2,6 @@ package Hint;
 
 /**
  * Deze filterstrategie bepaalt of een hinttekst hoort bij een specifieke kamercontext.
- * Een hint wordt geaccepteerd als deze begint met de contextnaam gevolgd door een dubbele punt,
- * bijvoorbeeld: "ScrumBoard:
- *
  */
 public class ContextPrefixFilter implements HintFilterStrategy {
 
