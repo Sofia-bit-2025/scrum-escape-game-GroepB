@@ -23,4 +23,9 @@ public class SpelerService {
     public Speler getSpeler() {
         return speler;
     }
+
+    // Nieuw toegevoegd voor kamerAssistant
+    public int getLaatsteBezochteKamer() {
+        return speler.getLaatsteBezochteKamer();
+    }
 }

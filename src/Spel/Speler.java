@@ -2,6 +2,7 @@ package Spel;
 
 import java.util.HashSet;
 import java.util.Set;
+import Kamer.BasisKamer;
 
 public class Speler {
     private int spelerId;
@@ -33,5 +34,10 @@ public class Speler {
     public void kamerGehaald(int kamerNummer) {
         gehaaldeKamers.add(kamerNummer);
         huidigeKamer = kamerNummer;
+    }
+
+   //Nieuw toegevoegde methode voor kamer assistant
+    public int getLaatsteBezochteKamer() {
+        return huidigeKamer;
     }
 }

@@ -6,6 +6,8 @@ import monster.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import Assistent.*;
+import Opdracht.OpdrachtStrategy;
 
 /**
  * Hoofdklasse voor de Scrum Escape Game CLI.
@@ -26,20 +28,20 @@ public class GameConsole1 {
     private final KamerCommando kamerCommando;
     private final HelpMenu helpMenu = new HelpMenu();
 
-    //  monster activeert deur na fout
+
     private final Map<Integer, MonsterBasis> monsters = new HashMap<>();
 
     public GameConsole1() {
         this.speler = new Opstart().start();
         this.spelerService = new SpelerService(speler);
-        this.kamers = FactoryKamer.maakKamers();  // Elke kamer krijgt een opdracht met hint
+        this.kamers = FactoryKamer.maakKamers();
         this.spelerStatus = new SpelerStatus(speler);
 
         for (int kamerNr : kamers.keySet()) {
             Deur deur = new Deur();
             deuren.put(kamerNr, deur);
 
-            // Monster koppelen aan deur via observerpattern
+
             MonsterBasis monster = new ScopeCreep(StrategieFactory.maakStrategie("spring"));
             monster.voegWaarnemersToe(deur);
             monsters.put(kamerNr, monster);
@@ -64,16 +66,32 @@ public class GameConsole1 {
                 }
                 case "help" -> helpMenu.toonHelpMenu();
                 case "status" -> spelerStatus.toonStatus();
+                case "assistent" -> gebruikHuidigeAssistent();//Assistant toegevoegd
+
                 default -> {
                     boolean geslaagd = kamerCommando.verwerkKamerCommando(input);
                     if (!geslaagd) {
                         int kamerNr = haalKamernummerUitInput(input);
                         if (kamerNr != -1 && monsters.containsKey(kamerNr)) {
-                            monsters.get(kamerNr).valAan(); // activeer monster bij fout
+                            monsters.get(kamerNr).valAan();
+
                         }
                     }
                 }
             }
+        }
+    }
+
+
+    //Kamerassistant toegevoegd
+    private void gebruikHuidigeAssistent() {
+        int huidigeKamerNr = speler.getLaatsteBezochteKamer();
+        Kamer kamer = kamers.get(huidigeKamerNr);
+
+        if (kamer instanceof BasisKamer basisKamer) {
+            basisKamer.gebruikAssistent();
+        } else {
+            System.out.println("Deze kamer heeft geen assistentfunctie.");
         }
     }
 
