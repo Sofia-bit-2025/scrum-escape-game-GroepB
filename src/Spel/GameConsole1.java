@@ -12,7 +12,6 @@ import Opdracht.OpdrachtStrategy;
 /**
  * Hoofdklasse voor de Scrum Escape Game CLI.
  * Stuurt login, kamerlogica, hints, monsters, deuren en spelerstatus aan.
- * Zorgt ervoor dat kamer-logica, hints en opdrachten correct worden aangeroepen.
  */
 public class GameConsole1 {
     public static void main(String[] args) {
