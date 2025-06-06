@@ -1,49 +1,35 @@
 package Opdracht;
 
-import Hint.Hint;
-import Hint.HintFactory;
-
 import java.util.Scanner;
 
-/**
- * Een concrete opdracht voor de ScrumBoard-kamer.
- */
-public class ScrumBoardOpdracht implements OpdrachtStrategy {
-
-    private final Scanner scanner;
+public class ScrumBoardOpdracht extends InteractieveOpdracht {
 
     public ScrumBoardOpdracht(Scanner scanner) {
-        this.scanner = scanner;
+        super(scanner, "ScrumBoard");
     }
 
     @Override
-    public boolean voerUit() {
-        System.out.println("Opdracht: Waar hoort de taak 'abstracte klasse controleren' op het Scrum Board?");
-        System.out.println("A) To Do");
-        System.out.println("B) Doing");
-        System.out.println("C) Done");
+    protected String getVraag() {
+        return "Opdracht: Waar hoort de taak 'abstracte klasse controleren' op het Scrum Board?";
+    }
 
-        System.out.print("> Jouw antwoord: ");
-        String antwoord = scanner.nextLine().trim().toUpperCase();
+    @Override
+    protected String[] getOpties() {
+        return new String[] {"To Do", "Doing", "Done"};
+    }
 
-        if (antwoord.length() > 0) {
-            antwoord = antwoord.substring(0, 1); // Pak eerste letter
-        }
+    @Override
+    protected String getJuisteAntwoord() {
+        return "B";
+    }
 
-        if (antwoord.equals("B")) {
-            System.out.println("Correct! Deze taak hoort bij 'Doing'.");
-            return true;
-        } else {
-            System.out.println("Fout. Het juiste antwoord was: B) Doing.");
-            System.out.print("Wil je een hint? (ja/nee): ");
-            String keuze = scanner.nextLine().trim().toLowerCase();
+    @Override
+    protected String getFeedbackCorrect() {
+        return "Correct! Deze taak hoort bij 'Doing'.";
+    }
 
-            if (keuze.equals("ja")) {
-                Hint hint = HintFactory.geefRandomHint("ScrumBoard");
-                System.out.println("Hint (" + hint.getType() + "): " + hint.getTekst());
-            }
-
-            return false;
-        }
+    @Override
+    protected String getFeedbackFout() {
+        return "Fout. Het juiste antwoord was: B) Doing.";
     }
 }

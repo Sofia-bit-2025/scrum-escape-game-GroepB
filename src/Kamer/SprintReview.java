@@ -1,22 +1,16 @@
 package Kamer;
 
-import Assistent.*;
+import Assistent.AssistentFactory;
 import Opdracht.OpdrachtStrategy;
 
-
 public class SprintReview extends BasisKamer {
-
 
     public SprintReview(OpdrachtStrategy opdracht) {
         super(
                 "SprintReview",
                 "Beoordeel het resultaat.",
                 opdracht,
-                new KamerAssistent(
-                        "SprintReview", // context voor hints/uitleg/motivatie
-                        new DefaultEducatiefProvider(),
-                        new DefaultMotivatieProvider()
-                )
+                AssistentFactory.maakStandaardAssistent("SprintReview")
         );
     }
 }

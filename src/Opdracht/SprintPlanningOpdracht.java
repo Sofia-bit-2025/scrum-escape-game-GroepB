@@ -1,53 +1,39 @@
 package Opdracht;
 
-import Hint.Hint;
-import Hint.HintFactory;
-
 import java.util.Scanner;
 
-/**
- * Opdracht voor de Sprint Planning-kamer.
- */
-public class SprintPlanningOpdracht implements OpdrachtStrategy {
-
-    private final Scanner scanner;
+public class SprintPlanningOpdracht extends InteractieveOpdracht {
 
     public SprintPlanningOpdracht(Scanner scanner) {
-        this.scanner = scanner;
+        super(scanner, "SprintPlanning");
     }
 
     @Override
-    public boolean voerUit() {
-        System.out.println("Wat plan je in de sprint?");
-        System.out.println("A) Bugs oplossen");
-        System.out.println("B) Wat het team kan afronden");
-        System.out.println("C) Alles in de backlog");
+    protected String getVraag() {
+        return "Wat plan je in de sprint?";
+    }
 
-        System.out.print("> Kies A, B of C: ");
-        String antwoord = scanner.nextLine().trim().toUpperCase();
+    @Override
+    protected String[] getOpties() {
+        return new String[] {
+                "Bugs oplossen",
+                "Wat het team kan afronden",
+                "Alles in de backlog"
+        };
+    }
 
-        if (antwoord.length() > 0) {
-            antwoord = antwoord.substring(0, 1);
-        }
+    @Override
+    protected String getJuisteAntwoord() {
+        return "B";
+    }
 
-        if (antwoord.equals("B")) {
-            System.out.println("Correct! Je plant alleen wat het team realistisch kan afronden.");
-            return true;
-        } else if (antwoord.equals("A") || antwoord.equals("C")) {
-            System.out.println("Fout! Je plant geen willekeurige bugs of alles uit de backlog.");
+    @Override
+    protected String getFeedbackCorrect() {
+        return "Correct! Je plant alleen wat het team realistisch kan afronden.";
+    }
 
-            System.out.print("Wil je een hint? (ja/nee): ");
-            String keuze = scanner.nextLine().trim().toLowerCase();
-
-            if (keuze.equals("ja")) {
-                Hint hint = HintFactory.geefRandomHint("SprintPlanning");
-                System.out.println("Hint (" + hint.getType() + "): " + hint.getTekst());
-            }
-
-            return false;
-        }
-
-        System.out.println("Ongeldige keuze.");
-        return false;
+    @Override
+    protected String getFeedbackFout() {
+        return "Fout! Je plant geen willekeurige bugs of alles uit de backlog.";
     }
 }
