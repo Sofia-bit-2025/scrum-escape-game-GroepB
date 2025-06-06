@@ -1,15 +1,12 @@
 package Hint;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HelpHintProvider implements HintProvider {
+public class HelpHintProvider extends AbstractHintProvider {
 
     @Override
-    public List<Hint> getHintsForContext(String context) {
-        List<Hint> result = new ArrayList<>();
-
-        List<Hint> allHints = List.of(
+    protected List<Hint> getAllHints() {
+        return List.of(
                 // ScrumBoard
                 new Hint("ScrumBoard: Scrum Board: check je kolommen: To Do, Doing, Done.", "help"),
                 new Hint("ScrumBoard: Taken verplaatsen op het board = zicht op voortgang.", "help"),
@@ -35,18 +32,10 @@ public class HelpHintProvider implements HintProvider {
                 new Hint("Finale: Iteraties zorgen voor regelmatige inspectie en aanpassing.", "help"),
                 new Hint("Finale: Gebruik Retrospectives om de iteratieve cyclus te verbeteren.", "help"),
 
-                // Random (geen prefix, dus niet gekoppeld aan context)
+                // Random (geen prefix)
                 new Hint("De kracht van Scrum zit in transparantie, inspectie en aanpassing.", "help"),
                 new Hint("Iedereen in het team is verantwoordelijk voor succes — niet alleen de Scrum Master.", "help"),
                 new Hint("Scrum werkt het best als iedereen actief deelneemt, elke dag opnieuw.", "help")
         );
-
-        for (Hint hint : allHints) {
-            if (hint.getTekst().startsWith(context + ":")) {
-                result.add(hint);
-            }
-        }
-
-        return result;
     }
 }

@@ -1,8 +1,6 @@
 package Hint;
 
-/**
- * Deze filterstrategie bepaalt of een hinttekst hoort bij een specifieke kamercontext.
- */
+
 public class ContextPrefixFilter implements HintFilterStrategy {
 
 

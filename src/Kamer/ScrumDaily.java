@@ -1,6 +1,6 @@
 package Kamer;
 
-import Assistent.*;
+import Assistent.AssistentFactory;
 import Opdracht.OpdrachtStrategy;
 
 public class ScrumDaily extends BasisKamer {
@@ -10,11 +10,7 @@ public class ScrumDaily extends BasisKamer {
                 "Daily Scrum",
                 "Iedereen geeft een korte statusupdate.",
                 opdracht,
-                new KamerAssistent(
-                        "DailyScrum", // context
-                        new DefaultEducatiefProvider(),
-                        new DefaultMotivatieProvider()
-                )
+                AssistentFactory.maakStandaardAssistent("DailyScrum")
         );
     }
 }

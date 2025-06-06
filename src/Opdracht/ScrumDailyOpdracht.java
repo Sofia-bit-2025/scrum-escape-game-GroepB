@@ -1,49 +1,39 @@
 package Opdracht;
 
-import Hint.Hint;
-import Hint.HintFactory;
-
 import java.util.Scanner;
 
-/**
- * Een concrete opdracht voor de Daily Scrumkamer.
- */
-public class ScrumDailyOpdracht implements OpdrachtStrategy {
-
-    private final Scanner scanner;
+public class ScrumDailyOpdracht extends InteractieveOpdracht {
 
     public ScrumDailyOpdracht(Scanner scanner) {
-        this.scanner = scanner;
+        super(scanner, "DailyScrum");
     }
 
     @Override
-    public boolean voerUit() {
-        System.out.println("Opdracht: Wat wordt besproken tijdens een Daily Scrum?");
-        System.out.println("A) Gedetailleerde sprintplanning");
-        System.out.println("B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades");
-        System.out.println("C) Retrospective feedback");
+    protected String getVraag() {
+        return "Opdracht: Wat wordt besproken tijdens een Daily Scrum?";
+    }
 
-        System.out.print("> Jouw antwoord: ");
-        String antwoord = scanner.nextLine().trim().toUpperCase();
+    @Override
+    protected String[] getOpties() {
+        return new String[] {
+                "Gedetailleerde sprintplanning",
+                "Wat ieder teamlid gedaan heeft, gaat doen, en blokkades",
+                "Retrospective feedback"
+        };
+    }
 
-        if (antwoord.length() > 0) {
-            antwoord = antwoord.substring(0, 1);
-        }
+    @Override
+    protected String getJuisteAntwoord() {
+        return "B";
+    }
 
-        if (antwoord.equals("B")) {
-            System.out.println("Correct! Dat is precies de bedoeling van een Daily Scrum.");
-            return true;
-        } else {
-            System.out.println("Fout. Het juiste antwoord was: B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades.");
-            System.out.print("Wil je een hint? (ja/nee): ");
-            String keuze = scanner.nextLine().trim().toLowerCase();
+    @Override
+    protected String getFeedbackCorrect() {
+        return "Correct! Dat is precies de bedoeling van een Daily Scrum.";
+    }
 
-            if (keuze.equals("ja")) {
-                Hint hint = HintFactory.geefRandomHint("DailyScrum");
-                System.out.println("Hint (" + hint.getType() + "): " + hint.getTekst());
-            }
-
-            return false;
-        }
+    @Override
+    protected String getFeedbackFout() {
+        return "Fout. Het juiste antwoord was: B) Wat ieder teamlid gedaan heeft, gaat doen, en blokkades.";
     }
 }
