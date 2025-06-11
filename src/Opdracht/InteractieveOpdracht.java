@@ -6,17 +6,13 @@ import Kamer.Kamer;
 
 import java.util.Scanner;
 
-/**
- * Een abstracte opdracht waarbij de speler een meerkeuzevraag moet beantwoorden.
- */
+
 public abstract class InteractieveOpdracht implements OpdrachtStrategy {
 
     protected final Scanner scanner;
     private final String context;
 
-    /**
-     * Constructor voor een interactieve opdracht.
-     */
+
     public InteractieveOpdracht(Scanner scanner, String context) {
         if (scanner == null) throw new IllegalArgumentException("Scanner mag niet null zijn.");
         if (context == null || context.isBlank()) throw new IllegalArgumentException("Context mag niet leeg zijn.");

@@ -1,16 +1,13 @@
+
 package Hint;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class FunnyHintProvider implements HintProvider {
+public class FunnyHintProvider extends AbstractHintProvider {
 
     @Override
-    public List<Hint> getHintsForContext(String context) {
-        List<Hint> result = new ArrayList<>();
-
-        // Alle hints met context-prefix
-        List<Hint> allHints = List.of(
+    protected List<Hint> getAllHints() {
+        return List.of(
                 new Hint("ScrumBoard: Als je nog nadenkt over de taak, is hij vast niet 'Done'.", "grappig"),
                 new Hint("ScrumBoard: Je hebt 'Doing' gehoord, maar doet nog niks.", "grappig"),
                 new Hint("ScrumBoard: Scrum Board? Meer zoals chaosbord als je zo doorgaat.", "grappig"),
@@ -31,19 +28,9 @@ public class FunnyHintProvider implements HintProvider {
                 new Hint("Finale: Iteraties: omdat 'één keer goed doen' alleen werkt in sprookjes.", "grappig"),
                 new Hint("Finale: Als je dit verpest, noemen we het een retrospectieve oefening.", "grappig"),
 
-                // Random hints zonder context
                 new Hint("Scrummen gaat beter met koffie dan met chaos.", "grappig"),
                 new Hint("Je team is geen sprintploeg, maar je kunt het proberen.", "grappig"),
                 new Hint("Een fout is gewoon een user story met een twist.", "grappig")
         );
-
-        // Filter op context via prefix
-        for (Hint hint : allHints) {
-            if (hint.getTekst().startsWith(context + ":")) {
-                result.add(hint);
-            }
-        }
-
-        return result;
     }
 }

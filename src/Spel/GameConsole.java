@@ -2,14 +2,21 @@ package Spel;
 
 import Kamer.Kamer;
 import monster.*;
-import Opdracht.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import Assistent.*;
+import Opdracht.OpdrachtStrategy;
 
-
-public class GameConsole {
+/**
+ * Hoofdklasse voor de Scrum Escape Game CLI.
+ * Stuurt login, kamerlogica, hints, monsters, deuren en spelerstatus aan.
+ */
+public class GameConsole1 {
+    public static void main(String[] args) {
+        new GameConsole1().start();
+    }
 
     private final Scanner scanner = new Scanner(System.in);
     private final Speler speler;
@@ -20,11 +27,10 @@ public class GameConsole {
     private final KamerCommando kamerCommando;
     private final HelpMenu helpMenu = new HelpMenu();
 
+
     private final Map<Integer, MonsterBasis> monsters = new HashMap<>();
 
-    private final Joker gekozenJoker;  // gekozen joker via aparte selector
-
-    public GameConsole() {
+    public GameConsole1() {
         this.speler = new Opstart().start();
         this.spelerService = new SpelerService(speler);
         this.kamers = FactoryKamer.maakKamers();
@@ -34,16 +40,14 @@ public class GameConsole {
             Deur deur = new Deur();
             deuren.put(kamerNr, deur);
 
+
             MonsterBasis monster = new ScopeCreep(StrategieFactory.maakStrategie("spring"));
             monster.voegWaarnemersToe(deur);
             monsters.put(kamerNr, monster);
         }
 
-        // ➔ Joker kiezen vóórdat we de kamerCommando aanmaken
-        JokerSelector selector = new JokerSelector(scanner);
-        this.gekozenJoker = selector.kiesJoker();
 
-        this.kamerCommando = new KamerCommando(kamers, deuren, spelerService, scanner, monsters, gekozenJoker);
+        this.kamerCommando = new KamerCommando(kamers, deuren, spelerService, scanner);
     }
 
     public void start() {
@@ -61,29 +65,40 @@ public class GameConsole {
                 }
                 case "help" -> helpMenu.toonHelpMenu();
                 case "status" -> spelerStatus.toonStatus();
-                case "joker" -> gebruikJoker();
-                default -> kamerCommando.verwerkKamerCommando(input);
+                case "assistent" -> gebruikHuidigeAssistent();//Assistant toegevoegd
+
+                default -> {
+                    boolean geslaagd = kamerCommando.verwerkKamerCommando(input);
+                    if (!geslaagd) {
+                        int kamerNr = haalKamernummerUitInput(input);
+                        if (kamerNr != -1 && monsters.containsKey(kamerNr)) {
+                            monsters.get(kamerNr).valAan();
+
+                        }
+                    }
+                }
             }
         }
     }
 
-    private void gebruikJoker() {
-        int kamerNr = speler.getHuidigeKamer();
-        if (kamerNr == 0) {
-            System.out.println("Je bevindt je niet in een kamer.");
-            return;
-        }
 
-        Kamer huidigeKamer = kamers.get(kamerNr);
-        if (huidigeKamer == null) {
-            System.out.println("Ongeldige kamer.");
-            return;
-        }
+    //Kamerassistant toegevoegd
+    private void gebruikHuidigeAssistent() {
+        int huidigeKamerNr = speler.getLaatsteBezochteKamer();
+        Kamer kamer = kamers.get(huidigeKamerNr);
 
-        if (gekozenJoker.isAvailableFor(huidigeKamer)) {
-            gekozenJoker.useIn(huidigeKamer);
+        if (kamer instanceof BasisKamer basisKamer) {
+            basisKamer.gebruikAssistent();
         } else {
-            System.out.println("De joker kan hier niet worden gebruikt of is al opgebruikt.");
+            System.out.println("Deze kamer heeft geen assistentfunctie.");
+        }
+    }
+
+    private int haalKamernummerUitInput(String input) {
+        try {
+            return Integer.parseInt(input.replaceAll("\\D+", ""));
+        } catch (NumberFormatException e) {
+            return -1;
         }
     }
 }
