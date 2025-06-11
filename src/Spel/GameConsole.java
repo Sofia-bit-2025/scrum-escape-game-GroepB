@@ -9,10 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-public class GameConsole1 {
-    public static void main(String[] args) {
-        new GameConsole1().start();
-    }
+public class GameConsole {
 
     private final Scanner scanner = new Scanner(System.in);
     private final Speler speler;
@@ -27,7 +24,7 @@ public class GameConsole1 {
 
     private final Joker gekozenJoker;  // gekozen joker via aparte selector
 
-    public GameConsole1() {
+    public GameConsole() {
         this.speler = new Opstart().start();
         this.spelerService = new SpelerService(speler);
         this.kamers = FactoryKamer.maakKamers();
@@ -42,11 +39,11 @@ public class GameConsole1 {
             monsters.put(kamerNr, monster);
         }
 
-        this.kamerCommando = new KamerCommando(kamers, deuren, spelerService, scanner, monsters);
-
-        // Joker kiezen via aparte klasse
+        // ➔ Joker kiezen vóórdat we de kamerCommando aanmaken
         JokerSelector selector = new JokerSelector(scanner);
         this.gekozenJoker = selector.kiesJoker();
+
+        this.kamerCommando = new KamerCommando(kamers, deuren, spelerService, scanner, monsters, gekozenJoker);
     }
 
     public void start() {

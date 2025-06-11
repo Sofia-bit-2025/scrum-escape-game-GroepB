@@ -1,5 +1,6 @@
 package Kamer;
 
+import Opdracht.Joker;
 import Opdracht.OpdrachtStrategy;
 
 /**
@@ -36,7 +37,7 @@ public class TiaFinaleKamer extends Kamer {
      * @return true als speler correct antwoordt, anders false
      */
     @Override
-    public boolean start() {
-        return opdracht.voerUit();
+    public boolean start(Joker gekozenJoker) {
+        return opdracht.voerUit(this, gekozenJoker);  // Strategy Pattern toegepast hier
     }
 }

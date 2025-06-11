@@ -1,5 +1,7 @@
 package Kamer;
 
+import Opdracht.Joker;
+
 /**
  * Abstracte basis voor elke kamer in het spel.
  * dwingt structuur af voor naam, instructie en opdrachtuitvoering.
@@ -16,8 +18,7 @@ public abstract class Kamer {
 
     public abstract void betreed();
 
-
-    public abstract boolean start();
+    public abstract boolean start(Joker gekozenJoker);
 
     /**
      * @return naam van de kamer

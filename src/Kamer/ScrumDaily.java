@@ -1,5 +1,6 @@
 package Kamer;
 
+import Opdracht.Joker;
 import Opdracht.OpdrachtStrategy;
 
 /**
@@ -30,11 +31,10 @@ public class ScrumDaily extends Kamer {
     }
 
     /**
-
      * @return true als opdracht goed is uitgevoerd
      */
     @Override
-    public boolean start() {
-        return opdracht.voerUit(); // Strategy pattern toegepast
+    public boolean start(Joker gekozenJoker) {
+        return opdracht.voerUit(this, gekozenJoker);  // Strategy Pattern toegepast hier
     }
 }

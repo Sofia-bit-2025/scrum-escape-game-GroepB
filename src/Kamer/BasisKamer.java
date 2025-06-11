@@ -1,5 +1,6 @@
 package Kamer;
 
+import Opdracht.Joker;
 import Opdracht.OpdrachtStrategy;
 import java.util.Objects;
 
@@ -11,12 +12,15 @@ import java.util.Objects;
  */
 public abstract class BasisKamer extends Kamer {
 
-    /** De tekstinstructie die wordt getoond bij het betreden van de kamer. */
+    /**
+     * De tekstinstructie die wordt getoond bij het betreden van de kamer.
+     */
     private final String instructie;
 
-    /** De opdracht die uitgevoerd wordt wanneer de kamer start. */
+    /**
+     * De opdracht die uitgevoerd wordt wanneer de kamer start.
+     */
     private final OpdrachtStrategy opdracht;
-
 
 
     //De constructor maakt een kamer aan met een naam, instructietekst en opdracht.
@@ -26,7 +30,6 @@ public abstract class BasisKamer extends Kamer {
         this.instructie = validateInstructie(instructie);
         this.opdracht = Objects.requireNonNull(opdracht, "Opdracht mag niet null zijn.");
     }
-
 
 
     //Deze methode checkt of de instructie geldig is.
@@ -49,11 +52,10 @@ public abstract class BasisKamer extends Kamer {
     }
 
 
-
     //Deze methode start de opdracht van de kamer
     //roept gewoon de voerUit() methode aan op de opdrachtstrategie
     @Override
-    public boolean start() {
-        return opdracht.voerUit();
+    public boolean start(Joker gekozenJoker) {
+        return opdracht.voerUit(this, gekozenJoker);
     }
 }

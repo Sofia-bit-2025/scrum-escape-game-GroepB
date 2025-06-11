@@ -1,5 +1,6 @@
 package Kamer;
 
+import Opdracht.Joker;
 import Opdracht.OpdrachtStrategy;
 
 /**
@@ -37,7 +38,7 @@ public class SprintReview extends Kamer {
      * @return true als de opdracht succesvol werd uitgevoerd
      */
     @Override
-    public boolean start() {
-        return opdracht.voerUit();
+    public boolean start(Joker gekozenJoker) {
+        return opdracht.voerUit(this, gekozenJoker);  // Strategy Pattern toegepast hier
     }
 }

@@ -2,6 +2,7 @@ package Opdracht;
 
 import Hint.Hint;
 import Hint.HintFactory;
+import Kamer.Kamer;
 
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
     protected abstract String getFeedbackFout();
 
     @Override
-    public boolean voerUit() {
+    public boolean voerUit(Kamer kamer, Joker gekozenJoker) {
         toonVraagEnOpties();
         String antwoord = vraagGebruikerOmAntwoord();
 

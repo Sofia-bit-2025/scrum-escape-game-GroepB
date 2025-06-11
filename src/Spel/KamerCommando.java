@@ -1,6 +1,7 @@
 package Spel;
 
 import Kamer.Kamer;
+import Opdracht.Joker;
 import monster.MonsterBasis;
 
 import java.util.Map;
@@ -12,13 +13,20 @@ public class KamerCommando {
     private final Map<Integer, MonsterBasis> monsters;
     private final SpelerService spelerService;
     private final Scanner scanner;
+    private final Joker gekozenJoker;  // ➔ hier toegevoegd
 
-    public KamerCommando(Map<Integer, Kamer> kamers, Map<Integer, Deur> deuren, SpelerService spelerService, Scanner scanner, Map<Integer, MonsterBasis> monsters) {
+    public KamerCommando(Map<Integer, Kamer> kamers,
+                         Map<Integer, Deur> deuren,
+                         SpelerService spelerService,
+                         Scanner scanner,
+                         Map<Integer, MonsterBasis> monsters,
+                         Joker gekozenJoker) {  // ➔ hier toegevoegd
         this.kamers = kamers;
         this.deuren = deuren;
         this.spelerService = spelerService;
         this.scanner = scanner;
         this.monsters = monsters;
+        this.gekozenJoker = gekozenJoker;  // ➔ hier toegevoegd
     }
 
     public void verwerkKamerCommando(String input) {
@@ -42,7 +50,9 @@ public class KamerCommando {
                 deur.toonGeslotenDeur();
 
                 kamer.betreed();
-                boolean gelukt = kamer.start();
+
+                // hier gebruik je het juiste Joker-object:
+                boolean gelukt = kamer.start(gekozenJoker);
 
                 if (gelukt) {
                     System.out.println("Opdracht geslaagd! Kamer " + nummer + " gehaald.");
