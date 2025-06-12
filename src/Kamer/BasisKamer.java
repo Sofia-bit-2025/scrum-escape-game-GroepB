@@ -2,6 +2,7 @@ package Kamer;
 
 import Assistent.Assistent;
 import Opdracht.OpdrachtStrategy;
+import Opdracht.Joker;
 
 import java.util.Objects;
 
@@ -49,7 +50,7 @@ public abstract class BasisKamer extends Kamer {
     }
 
     @Override
-    public boolean start() {
-        return opdracht.voerUit();
+    public boolean start(Joker gekozenJoker) {
+        return opdracht.voerUit(this, gekozenJoker);
     }
 }
