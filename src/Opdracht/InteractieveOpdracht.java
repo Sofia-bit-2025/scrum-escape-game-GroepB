@@ -35,6 +35,15 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
         toonVraagEnOpties();
         String antwoord = vraagGebruikerOmAntwoord();
 
+        if (antwoord.equalsIgnoreCase("joker")) {
+            if (gekozenJoker != null && gekozenJoker.isAvailableFor(kamer)) {
+                gekozenJoker.useIn(kamer);
+            } else {
+                System.out.println("De joker kan hier niet worden gebruikt of is al opgebruikt.");
+            }
+            return voerUit(kamer, gekozenJoker);
+        }
+
         if (!isGeldigeKeuze(antwoord)) {
             System.out.println("Ongeldige keuze. Kies bijvoorbeeld A, B of C.");
             return false;
