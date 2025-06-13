@@ -7,6 +7,9 @@ public class AssistentFactory {
                 context,
                 new DefaultEducatiefProvider(),
                 new DefaultMotivatieProvider()
+
         );
     }
 }
+
+//hint toevoegen nog

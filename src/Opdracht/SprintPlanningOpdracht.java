@@ -37,3 +37,5 @@ public class SprintPlanningOpdracht extends InteractieveOpdracht {
         return "Fout! Je plant geen willekeurige bugs of alles uit de backlog.";
     }
 }
+
+

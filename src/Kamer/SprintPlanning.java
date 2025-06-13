@@ -1,16 +1,18 @@
 package Kamer;
 
-import Assistent.AssistentFactory;
-import Opdracht.OpdrachtStrategy;
+import Assistent.AssistentSetup;
+import Opdracht.SprintPlanningOpdrachtFactory;
+
+import java.util.Scanner;
 
 public class SprintPlanning extends BasisKamer {
 
-    public SprintPlanning(OpdrachtStrategy opdracht) {
+    public SprintPlanning(Scanner scanner) {
         super(
                 "SprintPlanning",
                 "Plan de sprint.",
-                opdracht,
-                AssistentFactory.maakStandaardAssistent("SprintPlanning")
+                SprintPlanningOpdrachtFactory.maakOpdracht(scanner),
+                AssistentSetup.maakAssistentVoorContext("SprintPlanning")
         );
     }
 }

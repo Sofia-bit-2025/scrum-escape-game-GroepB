@@ -1,16 +1,19 @@
 package Kamer;
 
-import Assistent.AssistentFactory;
+import Assistent.AssistentSetup;
 import Opdracht.OpdrachtStrategy;
+import Opdracht.ScrumDailyOpdrachtFactory;
+
+import java.util.Scanner;
 
 public class ScrumDaily extends BasisKamer {
 
-    public ScrumDaily(OpdrachtStrategy opdracht) {
+    public ScrumDaily(Scanner scanner) {
         super(
                 "Daily Scrum",
                 "Iedereen geeft een korte statusupdate.",
-                opdracht,
-                AssistentFactory.maakStandaardAssistent("DailyScrum")
+                ScrumDailyOpdrachtFactory.maakOpdracht(scanner),
+                AssistentSetup.maakAssistentVoorContext("DailyScrum")
         );
     }
 }
