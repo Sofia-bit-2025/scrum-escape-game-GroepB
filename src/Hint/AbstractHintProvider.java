@@ -2,6 +2,8 @@ package Hint;
 
 import java.util.List;
 
+//basisstructuur voor alle hintproviders
+//Zorgt dat filtering op context centraal gebeurt via de HintFilter
 public abstract class AbstractHintProvider implements HintProvider {
 
     private final HintFilter hintFilter;
