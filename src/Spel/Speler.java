@@ -5,43 +5,39 @@ import java.util.Set;
 import Kamer.BasisKamer;
 
 public class Speler {
-    private int spelerId;
-    private String gebruikersnaam;
-    private Set<Integer> gehaaldeKamers = new HashSet<>();
-    private int huidigeKamer = 0;
+    private SpelerInfo info;
+    private SpelerVoortgang voortgang;
 
     public Speler(int spelerId, String gebruikersnaam) {
-        this.spelerId = spelerId;
-        this.gebruikersnaam = gebruikersnaam;
+        this.info = new SpelerInfo(spelerId, gebruikersnaam);
+        this.voortgang = new SpelerVoortgang();
     }
 
     public int getSpelerId() {
-        return spelerId;
+        return info.getSpelerId();
     }
 
     public String getGebruikersnaam() {
-        return gebruikersnaam;
+        return info.getGebruikersnaam();
     }
 
     public Set<Integer> getGehaaldeKamers() {
-        return gehaaldeKamers;
+        return voortgang.getGehaaldeKamers();
     }
 
     public int getHuidigeKamer() {
-        return huidigeKamer;
+        return voortgang.getHuidigeKamer();
     }
 
     public void setHuidigeKamer(int kamerNummer) {
-        this.huidigeKamer = kamerNummer;
+        voortgang.setHuidigeKamer(kamerNummer);
     }
 
     public void kamerGehaald(int kamerNummer) {
-        gehaaldeKamers.add(kamerNummer);
-        huidigeKamer = kamerNummer;
+        voortgang.kamerGehaald(kamerNummer);
     }
 
-   //Nieuw toegevoegde methode voor kamer assistant
     public int getLaatsteBezochteKamer() {
-        return huidigeKamer;
+        return voortgang.getLaatsteBezochteKamer();
     }
 }
