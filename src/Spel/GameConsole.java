@@ -7,6 +7,7 @@ import Kamer.BasisKamer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import Opdracht.Foutmelding;
 import Assistent.*;
 
 /**
@@ -105,7 +106,7 @@ public class GameConsole {
         if (gekozenJoker.isAvailableFor(kamer)) {
             gekozenJoker.useIn(kamer);
         } else {
-            System.out.println("De joker kan hier niet worden gebruikt of is al opgebruikt.");
+            System.out.println(Foutmelding.jokerERROR);
         }
     }
 }

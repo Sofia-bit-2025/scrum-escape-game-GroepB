@@ -3,6 +3,8 @@ package Opdracht;
 import Hint.Hint;
 import Hint.HintFactory;
 import Kamer.Kamer;
+import Opdracht.Foutmelding;
+
 
 import java.util.Scanner;
 
@@ -39,7 +41,7 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
             if (gekozenJoker != null && gekozenJoker.isAvailableFor(kamer)) {
                 gekozenJoker.useIn(kamer);
             } else {
-                System.out.println("De joker kan hier niet worden gebruikt of is al opgebruikt.");
+                System.out.println(Foutmelding.jokerERROR);
             }
             return voerUit(kamer, gekozenJoker);
         }
