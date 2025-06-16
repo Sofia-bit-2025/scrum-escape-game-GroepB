@@ -1,5 +1,7 @@
 package Spel;
 
+import voorwerp.Weapon;
+import voorwerp.Zwaard;
 import java.util.HashSet;
 import java.util.Set;
 import Kamer.BasisKamer;
@@ -7,10 +9,13 @@ import Kamer.BasisKamer;
 public class Speler {
     private SpelerInfo info;
     private SpelerVoortgang voortgang;
+    private Weapon wapen;
+    private boolean heeftIntroGezien = false;
 
     public Speler(int spelerId, String gebruikersnaam) {
         this.info = new SpelerInfo(spelerId, gebruikersnaam);
         this.voortgang = new SpelerVoortgang();
+        this.wapen = new Zwaard("needle");
     }
 
     public int getSpelerId() {
@@ -40,4 +45,20 @@ public class Speler {
     public int getLaatsteBezochteKamer() {
         return voortgang.getLaatsteBezochteKamer();
     }
+
+    public Weapon getWapen() {
+        return wapen;
+    }
+
+    public boolean isHeeftIntroGezien(){
+        return heeftIntroGezien;
+    }
+
+    public void markeerIntroGezien(){
+        this.heeftIntroGezien = true;
+    }
+    public boolean heeftVoorwerp(String naam) {
+        return naam.equalsIgnoreCase("zwaard");
+    }
+
 }
