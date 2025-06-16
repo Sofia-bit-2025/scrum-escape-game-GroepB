@@ -1,5 +1,4 @@
 package Kamer;
-import Opdracht.Joker;
 
 
 public abstract class Kamer {
@@ -14,7 +13,7 @@ public abstract class Kamer {
     public abstract void betreed();
 
 
-    public abstract boolean start(Joker gekozenJoker);
+    public abstract boolean start();
 
 
     public String getNaam() {
