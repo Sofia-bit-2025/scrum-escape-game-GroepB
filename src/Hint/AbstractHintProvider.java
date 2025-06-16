@@ -1,22 +1,22 @@
 package Hint;
 
-import java.util.ArrayList;
 import java.util.List;
 
+//basisstructuur voor alle hintproviders
+//Zorgt dat filtering op context centraal gebeurt via de HintFilter
 public abstract class AbstractHintProvider implements HintProvider {
+
+    private final HintFilter hintFilter;
+
+    public AbstractHintProvider() {
+
+        this.hintFilter = new HintFilter(new ContextPrefixFilter());
+    }
 
     @Override
     public List<Hint> getHintsForContext(String context) {
-        List<Hint> result = new ArrayList<>();
         List<Hint> allHints = getAllHints();
-
-        for (Hint hint : allHints) {
-            if (hint.getTekst().startsWith(context + ":")) {
-                result.add(hint);
-            }
-        }
-
-        return result;
+        return hintFilter.filter(allHints, context);
     }
 
     protected abstract List<Hint> getAllHints();
