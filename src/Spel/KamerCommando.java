@@ -1,8 +1,11 @@
 package Spel;
 
+import Hint.Hint;
+import Hint.HintFactory;
 import Kamer.Kamer;
 import Opdracht.Joker;
 import monster.MonsterBasis;
+import voorwerp.Weapon;
 
 
 import java.util.Map;
@@ -75,9 +78,22 @@ public class KamerCommando {
                 );
                 return true;
             } else {
-                System.out.println("Opdracht niet geslaagd. Monster wordt geactiveerd!");
                 if (monsters.containsKey(kamerNr)) {
-                    monsters.get(kamerNr).valAan();
+                    MonsterBasis monster = monsters.get(kamerNr);
+                    monster.valAan();
+
+                    Weapon wapen = spelerService.getSpeler().getWapen();
+                    if (wapen != null) {
+                        wapen.gebruikOp(monster);
+                    } else {
+                        System.out.println("Je hebt geen wapen om je te verdedigen!");
+                    }
+                    System.out.print("Wil je een hint? (ja/nee): ");
+                    String antwoord = scanner.nextLine();
+                    if (antwoord.equalsIgnoreCase("ja")) {
+                        Hint hint = HintFactory.geefRandomHint(kamer.getNaam());
+                        System.out.println("💡 Hint: " + hint.getTekst());
+                    }
                 }
                 return false;
             }
