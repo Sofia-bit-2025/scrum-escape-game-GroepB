@@ -2,6 +2,8 @@ package voorwerp;
 
 import monster.MonsterBasis;
 
+import java.util.Scanner;
+
 public class Zwaard implements Weapon {
     private String naam;
 
@@ -13,10 +15,43 @@ public class Zwaard implements Weapon {
     @Override
     public void attack(){
 
-        System.out.println("      ||");
-        System.out.println("O|@@@|* >=============>>");
-        System.out.println("      ||");
-        System.out.println(naam + "chop chop!");
+        Scanner scanner = new Scanner(System.in);
+
+        String[] frames = {
+                """
+        \n PAK HET ZWAARD!!!
+        """,
+                """
+        \n                         █▄█   █▀█  █▀█  ▄█▄█
+              ||                   ▀██▄ ▀▄▀  ▀▄▀ ▄██▀
+        O|@@@|* >=============>>>     ▄██▀███▀███▄
+              ||                      ▀█▀██▄▄▄██▀█▀▌
+        """,
+                """
+        \n              █▄█   █▀█  █▀█  ▄█▄█
+              ||        ▀██▄ ▀▄▀  ▀▄▀ ▄██▀
+        O|@@@|* >==========▄██▀███▀███▄
+              ||          ▐▀█▀██▄▄▄██▀█▀▌
+        """,
+                """
+        \n         █▄█   █▀█  █▀█  ▄█▄█
+              ||   ▀██▄ ▀▄▀  ▀▄▀ ▄██▀
+        O|@@@|* >=====▄██▀███▀███▄
+              ||     ▐▀█▀██▄▄▄██▀█▀▌
+        """,
+
+                """
+        \n         
+        RIP.....
+        
+        """
+        };
+
+        for (String frame : frames) {
+            System.out.println(frame);
+            scanner.nextLine();
+        }
+
 
     }
 

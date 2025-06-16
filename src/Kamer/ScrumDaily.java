@@ -13,4 +13,9 @@ public class ScrumDaily extends BasisKamer {
                 AssistentFactory.maakStandaardAssistent("DailyScrum")
         );
     }
+
+    @Override
+    public boolean start() {
+        return false;
+    }
 }

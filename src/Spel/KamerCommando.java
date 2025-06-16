@@ -92,7 +92,7 @@ public class KamerCommando {
                     String antwoord = scanner.nextLine();
                     if (antwoord.equalsIgnoreCase("ja")) {
                         Hint hint = HintFactory.geefRandomHint(kamer.getNaam());
-                        System.out.println("💡 Hint: " + hint.getTekst());
+                        System.out.println("Hint: " + hint.getTekst());
                     }
                 }
                 return false;

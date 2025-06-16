@@ -13,4 +13,9 @@ public class TiaFinaleKamer extends BasisKamer {
                 AssistentFactory.maakStandaardAssistent("Finale Kamer: TIA")
         );
     }
+
+    @Override
+    public boolean start() {
+        return false;
+    }
 }

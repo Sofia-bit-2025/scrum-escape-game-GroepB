@@ -8,7 +8,7 @@ public class DatabaseService {
 
     private static final String URL = "jdbc:mysql://localhost:3306/ScrumGame";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "B!12P!12Pini!03";
 
     /**
      * Geeft een nieuwe verbinding naar de database.

@@ -13,4 +13,9 @@ public class ScrumBoard extends BasisKamer {
                 AssistentFactory.maakStandaardAssistent("ScrumBoard")
         );
     }
+
+    @Override
+    public boolean start() {
+        return false;
+    }
 }

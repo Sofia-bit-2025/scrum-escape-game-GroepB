@@ -13,4 +13,9 @@ public class SprintReview extends BasisKamer {
                 AssistentFactory.maakStandaardAssistent("SprintReview")
         );
     }
+
+    @Override
+    public boolean start() {
+        return false;
+    }
 }

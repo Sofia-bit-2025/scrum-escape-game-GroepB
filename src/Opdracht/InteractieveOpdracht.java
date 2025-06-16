@@ -57,7 +57,6 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
         }
 
         System.out.println(getFeedbackFout());
-        vraagOfHintGewenst();
         return false;
     }
 
@@ -79,12 +78,4 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
         return antwoord.matches("[A-Z]") && antwoord.length() == 1;
     }
 
-    private void vraagOfHintGewenst() {
-        System.out.print("Wil je een hint? (ja/nee): ");
-        String keuze = scanner.nextLine().trim().toLowerCase();
-        if (keuze.equals("ja")) {
-            Hint hint = HintFactory.geefRandomHint(context);
-            System.out.println("Hint (" + hint.getType() + "): " + hint.getTekst());
-        }
-    }
 }

@@ -13,4 +13,9 @@ public class SprintPlanning extends BasisKamer {
                 AssistentFactory.maakStandaardAssistent("SprintPlanning")
         );
     }
+
+    @Override
+    public boolean start() {
+        return false;
+    }
 }

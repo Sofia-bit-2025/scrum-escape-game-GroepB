@@ -30,7 +30,7 @@ public class Deur implements Waarnemer {
         System.out.println("|                    |   O    |                  |");
         System.out.println("|                    |        |                  |");
         System.out.println("|--------------------|--------|------------------|");
-        System.out.println("\n[DEUR STATUS] De deur naar kamer " + kamerNummer + " is gesloten:\n");
+        System.out.println("\n[DEUR STATUS] De deur is.... GESLOTEN\n");
     }
 
     public void toonOpenDeur(){
@@ -42,7 +42,7 @@ public class Deur implements Waarnemer {
         System.out.println("|                    |   |  o  |                 |");
         System.out.println("|                    |   |     |                 |");
         System.out.println("|--------------------|   |-----|-----------------|");
-        System.out.println("\n[DEUR STATUS] De deur naar kamer " + kamerNummer + " is open:\n");
+        System.out.println("\n[DEUR STATUS] De deur is... OPEN\n");
     }
 
 
