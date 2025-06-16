@@ -33,11 +33,14 @@ public class GameConsole {
         this.kamers = FactoryKamer.maakKamers();
         this.spelerStatus = new SpelerStatus(speler);
 
+        String[] strategieen = {"spring", "grom"};
+
         for (int kamerNr : kamers.keySet()) {
             Deur deur = new Deur();
             deuren.put(kamerNr, deur);
 
-            MonsterBasis monster = new ScopeCreep(StrategieFactory.maakStrategie("spring"));
+            String gekozen = strategieen[(int) (Math.random() * strategieen.length)];
+            MonsterBasis monster = new ScopeCreep(StrategieFactory.maakStrategie(gekozen));
             monster.voegWaarnemersToe(deur);
             monsters.put(kamerNr, monster);
         }
@@ -77,12 +80,6 @@ public class GameConsole {
                 case "joker" -> gebruikJoker();
                 default -> {
                     boolean geslaagd = kamerCommando.verwerkKamerCommando(input);
-                    if (!geslaagd) {
-                        int kamerNr = speler.getLaatsteBezochteKamer();
-                        if (kamerNr != -1 && monsters.containsKey(kamerNr)) {
-                            monsters.get(kamerNr).valAan();
-                        }
-                    }
                 }
             }
         }
