@@ -8,5 +8,6 @@ public class HelpMenu {
         System.out.println("joker");
         System.out.println("help");
         System.out.println("stop");
+        System.out.println("assistent");
     }
 }
