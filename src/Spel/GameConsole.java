@@ -2,22 +2,19 @@ package Spel;
 
 import Kamer.Kamer;
 import monster.*;
-
+import Opdracht.*;
+import Kamer.BasisKamer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import Opdracht.Foutmelding;
 import Assistent.*;
-import Opdracht.OpdrachtStrategy;
 
 /**
  * Hoofdklasse voor de Scrum Escape Game CLI.
  * Stuurt login, kamerlogica, hints, monsters, deuren en spelerstatus aan.
- * Zorgt ervoor dat kamer-logica, hints en opdrachten correct worden aangeroepen.
  */
-public class GameConsole1 {
-    public static void main(String[] args) {
-        new GameConsole1().start();
-    }
+public class GameConsole {
 
     private final Scanner scanner = new Scanner(System.in);
     private final Speler speler;
@@ -27,29 +24,42 @@ public class GameConsole1 {
     private final SpelerStatus spelerStatus;
     private final KamerCommando kamerCommando;
     private final HelpMenu helpMenu = new HelpMenu();
-
-
+    private final Joker gekozenJoker;
     private final Map<Integer, MonsterBasis> monsters = new HashMap<>();
 
-    public GameConsole1() {
+    public GameConsole() {
         this.speler = new Opstart().start();
         this.spelerService = new SpelerService(speler);
         this.kamers = FactoryKamer.maakKamers();
         this.spelerStatus = new SpelerStatus(speler);
 
+        String[] strategieen = {"spring", "grom"};
+
         for (int kamerNr : kamers.keySet()) {
             Deur deur = new Deur();
             deuren.put(kamerNr, deur);
 
-
-            MonsterBasis monster = new ScopeCreep(StrategieFactory.maakStrategie("spring"));
+            String gekozen = strategieen[(int) (Math.random() * strategieen.length)];
+            MonsterBasis monster = new ScopeCreep(StrategieFactory.maakStrategie(gekozen));
             monster.voegWaarnemersToe(deur);
             monsters.put(kamerNr, monster);
         }
 
 
-        this.kamerCommando = new KamerCommando(kamers, deuren, spelerService, scanner);
+        JokerSelector selector = new JokerSelector(scanner);
+        this.gekozenJoker = selector.kiesJoker();
+
+
+        this.kamerCommando = new KamerCommando(
+                kamers,
+                deuren,
+                spelerService,
+                scanner,
+                monsters,
+                gekozenJoker
+        );
     }
+
 
     public void start() {
         System.out.println("\nWelkom bij SCRUM ESCAPE: De Kameruitdaging!");
@@ -66,24 +76,15 @@ public class GameConsole1 {
                 }
                 case "help" -> helpMenu.toonHelpMenu();
                 case "status" -> spelerStatus.toonStatus();
-                case "assistent" -> gebruikHuidigeAssistent();//Assistant toegevoegd
-
+                case "assistent" -> gebruikHuidigeAssistent();
+                case "joker" -> gebruikJoker();
                 default -> {
                     boolean geslaagd = kamerCommando.verwerkKamerCommando(input);
-                    if (!geslaagd) {
-                        int kamerNr = haalKamernummerUitInput(input);
-                        if (kamerNr != -1 && monsters.containsKey(kamerNr)) {
-                            monsters.get(kamerNr).valAan();
-
-                        }
-                    }
                 }
             }
         }
     }
 
-
-    //Kamerassistant toegevoegd
     private void gebruikHuidigeAssistent() {
         int huidigeKamerNr = speler.getLaatsteBezochteKamer();
         Kamer kamer = kamers.get(huidigeKamerNr);
@@ -95,11 +96,14 @@ public class GameConsole1 {
         }
     }
 
-    private int haalKamernummerUitInput(String input) {
-        try {
-            return Integer.parseInt(input.replaceAll("\\D+", ""));
-        } catch (NumberFormatException e) {
-            return -1;
+    private void gebruikJoker() {
+        int kamerNr = speler.getHuidigeKamer();
+        Kamer kamer = kamers.get(kamerNr);
+
+        if (gekozenJoker.isAvailableFor(kamer)) {
+            gekozenJoker.useIn(kamer);
+        } else {
+            System.out.println(Foutmelding.jokerERROR);
         }
     }
 }

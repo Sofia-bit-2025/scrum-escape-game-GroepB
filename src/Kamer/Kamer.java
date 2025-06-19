@@ -1,6 +1,8 @@
 package Kamer;
 
 
+import Opdracht.Joker;
+
 public abstract class Kamer {
     protected final String naam;
 
@@ -19,4 +21,6 @@ public abstract class Kamer {
     public String getNaam() {
         return naam;
     }
+
+    public abstract boolean start(Joker gekozenJoker);
 }

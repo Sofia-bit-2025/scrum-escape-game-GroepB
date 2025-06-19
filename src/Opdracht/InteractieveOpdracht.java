@@ -2,6 +2,9 @@ package Opdracht;
 
 import Hint.Hint;
 import Hint.HintFactory;
+import Kamer.Kamer;
+import Opdracht.Foutmelding;
+
 
 import java.util.Scanner;
 
@@ -30,9 +33,18 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
     protected abstract String getFeedbackFout();
 
     @Override
-    public boolean voerUit() {
+    public boolean voerUit(Kamer kamer, Joker gekozenJoker) {
         toonVraagEnOpties();
         String antwoord = vraagGebruikerOmAntwoord();
+
+        if (antwoord.equalsIgnoreCase("joker")) {
+            if (gekozenJoker != null && gekozenJoker.isAvailableFor(kamer)) {
+                gekozenJoker.useIn(kamer);
+            } else {
+                System.out.println(Foutmelding.jokerERROR);
+            }
+            return voerUit(kamer, gekozenJoker);
+        }
 
         if (!isGeldigeKeuze(antwoord)) {
             System.out.println("Ongeldige keuze. Kies bijvoorbeeld A, B of C.");
@@ -45,7 +57,6 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
         }
 
         System.out.println(getFeedbackFout());
-        vraagOfHintGewenst();
         return false;
     }
 
@@ -67,12 +78,4 @@ public abstract class InteractieveOpdracht implements OpdrachtStrategy {
         return antwoord.matches("[A-Z]") && antwoord.length() == 1;
     }
 
-    private void vraagOfHintGewenst() {
-        System.out.print("Wil je een hint? (ja/nee): ");
-        String keuze = scanner.nextLine().trim().toLowerCase();
-        if (keuze.equals("ja")) {
-            Hint hint = HintFactory.geefRandomHint(context);
-            System.out.println("Hint (" + hint.getType() + "): " + hint.getTekst());
-        }
-    }
 }

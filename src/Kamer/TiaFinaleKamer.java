@@ -1,18 +1,21 @@
 package Kamer;
 
-import Assistent.AssistentSetup;
-import Opdracht.TiaFinaleOpdrachtFactory;
-
-import java.util.Scanner;
+import Assistent.AssistentFactory;
+import Opdracht.OpdrachtStrategy;
 
 public class TiaFinaleKamer extends BasisKamer {
 
-    public TiaFinaleKamer(Scanner scanner) {
+    public TiaFinaleKamer(OpdrachtStrategy opdracht) {
         super(
                 "Finale Kamer: TIA",
                 "Beantwoord vragen.",
-                TiaFinaleOpdrachtFactory.maakOpdracht(scanner),
-                AssistentSetup.maakAssistentVoorContext("Finale Kamer: TIA")
+                opdracht,
+                AssistentFactory.maakStandaardAssistent("Finale Kamer: TIA")
         );
+    }
+
+    @Override
+    public boolean start() {
+        return false;
     }
 }

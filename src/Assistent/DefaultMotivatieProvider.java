@@ -10,7 +10,7 @@ public class DefaultMotivatieProvider implements MotivatieProvider {
             case "dailyscrum" -> "Samen sta je sterker. Blijf communiceren.";
             case "sprintreview" -> "Feedback is je brandstof om te groeien!";
             case "finale kamer: tia" -> "Je bent bijna bij het eind — doorzetten!";
-            default -> "Jij hebt controle.";
+            default -> "Blijf rustig. Jij hebt controle.";
         };
     }
 }

@@ -1,18 +1,21 @@
 package Kamer;
 
-import Assistent.AssistentSetup;
-import Opdracht.SprintReviewOpdrachtFactory;
-
-import java.util.Scanner;
+import Assistent.AssistentFactory;
+import Opdracht.OpdrachtStrategy;
 
 public class SprintReview extends BasisKamer {
 
-    public SprintReview(Scanner scanner) {
+    public SprintReview(OpdrachtStrategy opdracht) {
         super(
                 "SprintReview",
                 "Beoordeel het resultaat.",
-                SprintReviewOpdrachtFactory.maakOpdracht(scanner),
-                AssistentSetup.maakAssistentVoorContext("SprintReview")
+                opdracht,
+                AssistentFactory.maakStandaardAssistent("SprintReview")
         );
+    }
+
+    @Override
+    public boolean start() {
+        return false;
     }
 }

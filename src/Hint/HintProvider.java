@@ -7,3 +7,13 @@ public interface HintProvider {
 
     List<Hint> getHintsForContext(String context);
 }
+
+
+
+
+
+
+
+
+
+

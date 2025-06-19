@@ -1,6 +1,6 @@
 package Kamer;
 
-import Assistent.AssistentSetup;
+import Assistent.AssistentFactory;
 import Opdracht.OpdrachtStrategy;
 
 public class ScrumBoard extends BasisKamer {
@@ -10,7 +10,12 @@ public class ScrumBoard extends BasisKamer {
                 "ScrumBoard",
                 "Gebruik het Scrum Board om je voortgang te visualiseren.",
                 opdracht,
-                AssistentSetup.maakAssistentVoorContext("ScrumBoard")
+                AssistentFactory.maakStandaardAssistent("ScrumBoard")
         );
+    }
+
+    @Override
+    public boolean start() {
+        return false;
     }
 }
